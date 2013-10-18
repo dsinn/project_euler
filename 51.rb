@@ -17,13 +17,13 @@ while answer < 0
             static_digits_set = sigma_star((0 .. 9).to_a, statics)
             static_digits_set_by_length[statics] = static_digits_set
         end
-        
+
         index_combos_set = index_combos_set_by_length[replacements / 3]
         if index_combos_set.nil?
             index_combos_set = combinations((0 .. length).to_a, replacements)
             index_combos_set_by_length[replacements / 3] = index_combos_set
         end
-        
+
         static_digits_set.each do |static_digits|
             # Iterate through every list of static digits
             index_combos_set.each do |index_combos|
@@ -35,7 +35,7 @@ while answer < 0
                     index_combos.each do |index|
                         digits.insert(index, '*')
                     end
-                    
+
                     primes = 0
                     smallest = -1
                     for i in 0 .. 9
@@ -52,7 +52,7 @@ while answer < 0
                             break
                         end
                     end
-                    
+
                     if primes >= 8
                         if answer < 0 or answer < smallest
                             answer = smallest

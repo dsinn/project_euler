@@ -24,10 +24,10 @@ answer = -1
 while answer < 0
     left_sum -= primes[width]
     sum = left_sum
-    
+
     if is_prime[sum]
         answer = sum
-    end    
+    end
     for i in 0 .. primes.length - 1 - width
         sum += primes[i + width] - primes[i]
         if sum > limit

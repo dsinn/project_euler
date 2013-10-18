@@ -36,7 +36,7 @@ for n in 2 .. $eightynine.length - 1
         chain << x
         x = digits_squared x
     end
-    
+
     result = $eightynine[x]
     chain.each do |y|
         $eightynine[y] = result

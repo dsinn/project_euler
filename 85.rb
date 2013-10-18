@@ -14,7 +14,7 @@ while true
     if height > width_float
         break
     end
-    
+
     [width_float.floor, width_float.ceil].each do |width|
         rectangles = width * (width + 1) / 2 * triangle_num
         diff = (rectangles - target).abs

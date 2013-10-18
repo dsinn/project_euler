@@ -16,12 +16,12 @@ for i in 2 .. hypercubes[9] * 6
     digits.each do |digit|
         sum += hypercubes[digit]
     end
-    
+
     if i == sum
         puts i
         total += i
     end
-    
+
     lenminus.downto(0) { |j|
         if digits[j] < 9
             digits[j] += 1

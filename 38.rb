@@ -6,7 +6,7 @@ permutations([8, 7, 6, 5, 4, 3, 2, 1], 8).each do |digits|
     if stop
         break
     end
-    
+
     digits.insert(0, 9)
     right_bound = 0
     s = digits.join('')

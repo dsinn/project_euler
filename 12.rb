@@ -6,18 +6,18 @@ def hasDivisors(x, amount)
         x >>= 1
         total += 1
     end
-    
+
     # Then odd
     factor = 3
     while x > 1
         count = total
         while x % factor == 0
             total += count
-            x /= factor            
+            x /= factor
         end
         factor += 2
     end
-    
+
     if x > 1
         total += 1
     end

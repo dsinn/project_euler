@@ -17,7 +17,7 @@ for len in 2 .. 6
                 end
                 cache << number
             end
-            
+
             if is_circular
                 puts digits.join('')
                 cache.each do |number|

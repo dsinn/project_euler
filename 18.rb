@@ -2,13 +2,13 @@ def max_triangle_path_sum(triangle)
     prev_maxes = Array.new(triangle.length)
     maxes = Array.new(triangle.length)
     maxes[0] = triangle[0][0]
-    
+
     for i in 1 .. triangle.length - 1
         prev_maxes, maxes = maxes, prev_maxes
         row = triangle[i]
         maxes[0] = prev_maxes[0] + row[0]
         maxes[i] = prev_maxes[i - 1] + row[i]
-        
+
         for j in 1 .. i - 1
             maxes[j] = row[j] + (prev_maxes[j] > prev_maxes[j - 1] ? prev_maxes[j] : prev_maxes[j - 1])
         end

@@ -17,7 +17,7 @@ for j in 1 .. j_max
         if mins[i1] > start_sum
             mins[i1] = start_sum
         end
-    
+
         sum = start_sum
         for i2 in i1 + 1 .. i_max
             sum += matrix[i2][j]
@@ -27,7 +27,7 @@ for j in 1 .. j_max
                 break
             end
         end
-        
+
         sum = start_sum
         (i1 - 1).downto(0) do |i2|
             sum += matrix[i2][j]
@@ -38,7 +38,7 @@ for j in 1 .. j_max
             end
         end
     end
-    
+
     for i in 0 .. i_max
         matrix[i][j] = mins[i]
     end

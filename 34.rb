@@ -17,7 +17,7 @@ for len in 2 .. 7
             digits.each do |digit|
                 sum += factorials[digit]
             end
-            
+
             if sum == digits.join('').to_i
                 puts sum
                 total += sum

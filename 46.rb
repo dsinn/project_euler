@@ -9,7 +9,7 @@ while true
         last_double_square = (double_squares.length + 1) * (double_squares.length + 1) << 1
         double_squares[last_double_square] = true
     end
-    
+
     # Check if prime/composite
     is_prime = true
     sqrt = Math.sqrt(n).floor
@@ -21,7 +21,7 @@ while true
             break
         end
     end
-    
+
     if is_prime
         odd_primes << n
     else
@@ -33,13 +33,13 @@ while true
                 break
             end
         end
-        
+
         if not conjecture_holds
             puts n
             break
         end
     end
-    
+
     n += 2
 end
 

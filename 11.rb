@@ -37,7 +37,7 @@ for i in 0 .. A.length - 1
     v_product = A[0][i] * A[1][i] * A[2][i] * A[3][i]
     products << h_product
     products << v_product
-    
+
     for j in 4 .. A[i].length - 1
         h_product = h_product / A[i][j-4] * A[i][j]
         v_product = v_product / A[j-4][i] * A[j][i]
@@ -52,18 +52,18 @@ for i in 0 .. A.length - 4
     slash_product2 = A[i][0] * A[i+1][1] * A[i+2][2] * A[i+3][3] # Bottom-left triangle
     backslash_product1 = A[0][-i-1] * A[1][-i-2] * A[2][-i-3] * A[3][-i-4] # Top-left triangle
     backslash_product2 = A[i][-1] * A[i+1][-2] * A[i+2][-3] * A[i+3][-4] # Bottom-right triangle
-    
+
     products << slash_product1
     products << slash_product2
     products << backslash_product1
     products << backslash_product2
-    
+
     for j in 4 .. A.length - i - 1
         slash_product1 = slash_product1 / A[j-4][i+j-4] * A[j][i+j]
         slash_product2 = slash_product2 / A[i+j-4][j-4] * A[i+j][j]
         backslash_product1 = backslash_product1 / A[j-4][-i-j+3] * A[j][-i-j-1]
         backslash_product2 = backslash_product2 / A[i+j-4][-j+3] * A[i+j][-j-1]
-        
+
         products << slash_product1
         products << slash_product2
         products << backslash_product1

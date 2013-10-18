@@ -5,13 +5,13 @@ h = Hash.new
 # Track which digits precede the others
 IO.readlines('keylog.txt').uniq.each do |line|
     digits = line.chomp.split('')
-    
+
     digits.each do |d|
         if not h.has_key? d
             h[d] = Hash.new
         end
     end
-    
+
     digits.each_with_index do |d, i|
         for j in 0 .. i - 1
             h[d][digits[j]] = true

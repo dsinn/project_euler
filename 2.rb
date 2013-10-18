@@ -1,6 +1,6 @@
 a = 1
 b = 2
-# Use booleans to 
+# Use booleans to
 a_even = false
 b_even = true
 

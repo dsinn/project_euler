@@ -24,14 +24,14 @@ while answer < 0 or increment < answer
         pents_hash[p] = true
         p_k = p
     end
-    
+
     if answer > 0
         min_p = p_k - answer
         while pents[j_min] <= min_p
             j_min += 1
         end
     end
-    
+
     pents[j_min .. k - 1].reverse_each do |p_j|
         diff = p_k - p_j
         if pents_hash.has_key? diff
@@ -42,7 +42,7 @@ while answer < 0 or increment < answer
                 pents << p
                 pents_hash[p] = true
             end
-            
+
             if pents_hash.has_key? sum
                 t1 = Time.now
                 answer = diff

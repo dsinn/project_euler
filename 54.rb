@@ -26,7 +26,7 @@ def encode(input)
     when 'S'
         3
     end
-        
+
     (r << 2) + s
 end
 
@@ -92,7 +92,7 @@ def hand_value(h)
                 break
             end
         end
-        
+
         if streak == 1
             # No streaks => no cards with matching rank
             ranks_value(r)
@@ -133,7 +133,7 @@ def hand_value(h)
                 # Three of a kind
                 temp = r[i]
                 r.slice!(i - 2 .. i)[0]
-                (3 << 20) + (temp << 8) + ranks_value(r)                
+                (3 << 20) + (temp << 8) + ranks_value(r)
             end
         elsif streak == 4
             # Four of a kind
@@ -172,7 +172,7 @@ def print_hand(hand)
             else
                 ' ' + r.to_s
             end
-            
+
             print case suit(card)
             when 0
                 'C'

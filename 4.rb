@@ -10,21 +10,21 @@ def next_palindrome_diff(digits)
     while i >= 0 and digits[i] == 0
         i -= 1
     end
-    
+
     if i < 0
         return 0
     end
-    
+
     # Decrement that digit and its palindrome complement
     digits[i] -= 1
     diff = exp10(lengthminus - i);
-    
+
     complement = lengthminus - i
     if i != complement
         digits[complement] -= 1
         diff += exp10(lengthminus - complement);
     end
-    
+
     # If number now has leading and trailing zeroes, remove them
     if digits[0] == 0
         digits.pop
@@ -45,7 +45,7 @@ def next_palindrome_diff(digits)
             end
         end
     end
-    
+
     diff
 end
 

@@ -34,7 +34,7 @@ limit.downto(1) { |n|
                     distance[x] = current_distance
                     current_distance += 1
                 end
-                
+
                 if distance[x] >= iters
                     count += 1
                 end

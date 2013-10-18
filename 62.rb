@@ -9,15 +9,15 @@ while answer < 0
     base_limit = ((power10 - 1) ** (1.0 / 3)).floor
     lowest_term = Hash.new
     frequency = Hash.new
-    
+
     for base in base + 1 .. base_limit
         cube = base * base * base
         cube_sorted = cube.to_s.split('').sort.join('')
-        
+
         if not lowest_term.has_key? cube_sorted
             lowest_term[cube_sorted] = cube
         end
-        
+
         if frequency.has_key? cube_sorted
             frequency[cube_sorted] += 1
             if frequency[cube_sorted] == 5

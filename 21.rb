@@ -8,7 +8,7 @@ end
 
 double_sum = 0
 for a in 1 .. amicable_sum.length - 1
-    b = amicable_sum[a]    
+    b = amicable_sum[a]
     if amicable_sum[b] == a and a != b
         puts a.to_s + ' ' + b.to_s
         double_sum += a + b

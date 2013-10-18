@@ -24,7 +24,7 @@ for i in 1 .. abundant_max - 1
             break
         end
     end
-    
+
     if not pair_exists
         sum += i
     end

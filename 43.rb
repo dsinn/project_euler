@@ -13,7 +13,7 @@ def computeNextDigit(digits)
         if summand < 0
             summand += prime
         end
-        
+
         while summand < 10
             char = summand.to_s
             if digits.index(char).nil?

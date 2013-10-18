@@ -33,10 +33,10 @@ buckets.each_with_index do |bucket, i|
                 break
             end
         end
-        
+
         if all_english
             key << guess
-            
+
             j = i
             bucket.each_with_index do |char, i|
                 ascii = guess ^ char
@@ -44,7 +44,7 @@ buckets.each_with_index do |bucket, i|
                 text[j] = ascii
                 j += key_length
             end
-            
+
             break
         end
     end

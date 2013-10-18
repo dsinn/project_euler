@@ -29,7 +29,7 @@ groups.each do |group|
     for i in 0 .. group.length - 1
         v << group[i].to_i
     end
-    
+
     if v.length < 5
         product = v[0]
         for i in 1 .. v.length - 1

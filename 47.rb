@@ -20,7 +20,7 @@ while true
             break
         end
     end
-    
+
     if distinct_pfactors[-1].length == 4 and distinct_pfactors[-2].length == 4 and distinct_pfactors[-3].length == 4 and distinct_pfactors[-4].length == 4
         puts distinct_pfactors[-4].join(' ')
         puts distinct_pfactors[-3].join(' ')
@@ -29,7 +29,7 @@ while true
         puts n - 3
         break
     end
-    
+
     n += 1
 end
 puts (Time.now - t0).to_s + ' s'

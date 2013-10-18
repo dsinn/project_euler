@@ -24,13 +24,13 @@ end
 
 def arithmetic_series_sum(start, bound, increment)
     start_remainder = start % increment
-    
+
     bound_remainder = bound % increment
     bound -= bound_remainder - start_remainder
     if (bound_remainder < start_remainder)
         bound -= increment
     end
-    
+
     (start + bound) * ((bound - start) / increment + 1) / 2
 end
 
@@ -46,7 +46,7 @@ def get_coprime_digits(a, b)
             end
         end
     end
-    
+
     coprimes = []
     for i in a .. b
         if !isnt_coprime[i]
@@ -61,7 +61,7 @@ def gcd(a, b)
     if a < b
         a, b = b, a
     end
-    
+
     r = [OpenStruct.new(:value => a, :x => 1, :y => 0),
         OpenStruct.new(:value => b, :x => 0, :y => 1)]
     i = 1
@@ -74,7 +74,7 @@ def gcd(a, b)
             :y => r[i - 2].y - q * r[i - 1].y
         )
     end
-    
+
     r[i - 1]
 end
 
@@ -101,12 +101,12 @@ def sieve_atkin(limit)
             if n <= limit and (n % 12 == 1 or n % 12 == 5)
                 is_prime[n] = !is_prime[n]
             end
-            
+
             n = 3 * i2 + j2
             if n <= limit and n % 12 == 7
                 is_prime[n] = !is_prime[n]
             end
-            
+
             if i > j
                 n = 3 * i2 - j2
                 if n <= limit and n % 12 == 11

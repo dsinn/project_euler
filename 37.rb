@@ -12,7 +12,7 @@ def truncatable_prime?(digits)
             end
             number /= 10
         end
-        
+
         if truncatable_prime
             s = digits.join('')[1 .. -1]
             while s.length > 0

@@ -3,7 +3,7 @@ t0 = Time.now
 def convert_singleton(s)
     replacements = Hash.new
     code = Array.new(s.length) {0}
-    
+
     distinct = 0
     chars = s.split('')
     chars.each_with_index do |c, i|
@@ -15,7 +15,7 @@ def convert_singleton(s)
             distinct += 1
         end
     end
-    
+
     [code, replacements]
 end
 
@@ -40,7 +40,7 @@ words.each do |word|
             break
         end
     end
-    
+
     if not is_anagram
         word_anagram_groups[word.length] << [word]
         cache[word] = word_sorted
@@ -61,12 +61,12 @@ word_anagram_groups.reverse.each do |groups|
             temp = convert_singleton(word)
             code = temp[0]
             replacements = temp[1]
-            
+
             if not hash.has_key? code
                 hash[code] = Hash.new
             end
             subhash = hash[code]
-            
+
             group.each_with_index do |word2, j|
                 if i != j
                     subhash[convert_from_hash(word2, replacements)] = true
@@ -93,13 +93,13 @@ end
 begin
     perm_hashes.each do |hash|
         length = hash.keys.first.length
-        
+
         # Compute all squares of this length in descending order
         squares = Hash.new
         Math.sqrt(10 ** length - 1).floor.downto(Math.sqrt(10 ** (length - 1)).ceil) do |base|
             squares[(base * base).to_s] = true
         end
-        
+
         squares.keys.each do |square|
             temp = convert_singleton(square)
             code = temp[0]
@@ -111,7 +111,7 @@ begin
                     perm.each do |pos|
                         new_number += square[pos]
                     end
-                    
+
                     if squares.has_key? new_number
                         puts square
                         raise ''

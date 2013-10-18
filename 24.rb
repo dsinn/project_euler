@@ -2,7 +2,7 @@ def nthPerm(n, chars)
     if chars.kind_of?(String)
         chars = chars.split('')
     end
-    
+
     product = 1
     factorials = [1]
     for i in 2 .. chars.length - 1
@@ -10,7 +10,7 @@ def nthPerm(n, chars)
         factorials << product
     end
     puts factorials
-    
+
     n -= 1 # n = 0 is the first permutation
     result = ''
     for i in 1 .. factorials.length

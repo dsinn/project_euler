@@ -14,13 +14,13 @@ answer = -1
             n = 3 * n + 1
         end
     end
-    
+
     len = stack.length + collatz_lengths[n]
     if max < len
         max = len
         answer = i
     end
-    
+
     # Put computed lengths into array
     for j in 0 .. stack.length - 1
         collatz_lengths[stack[j]] = len

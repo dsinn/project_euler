@@ -27,7 +27,7 @@ for n in 1 .. limit
                 break
             elsif not (i = chain.index(x)).nil?
                 for j in 0 .. i - 1
-                    distance[chain[j]] = chain.length - j                    
+                    distance[chain[j]] = chain.length - j
                 end
                 loop_length = chain.length - i
                 for j in i .. chain.length - 1

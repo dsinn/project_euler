@@ -19,7 +19,7 @@ while true
         end
     end
     x += 1
-    
+
     if x > limit
         power_10 *= 10
         limit = power_10 * 10 / 6

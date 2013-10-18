@@ -18,7 +18,7 @@ while true
     if primesx10 < diagonals
         break
     end
-    
+
     # Even case
     x += increment
     if prime? x

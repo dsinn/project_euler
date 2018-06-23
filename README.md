@@ -14,7 +14,7 @@ As much as I enjoyed using LaTeX in university, I'd rather just take advantage o
 
 My goal was to compute this in constant time, which can be done by adding the [arithmetic sums](https://en.wikipedia.org/wiki/Arithmetic_progression#Sum) of the 3's and 5's, then subtracting the 15's (lowest common multiple of 3 and 5) to negate the double-counting.
 
-[Source](./blob/master/1.rb)
+[Source](./src/001.rb)
 
 ## Problem 2: Even Fibonacci numbers
 
@@ -32,7 +32,7 @@ Because of the properties of addition with odd and even numbers, every third Fib
 
 It's good to store x<sub>i+2</sub> in a variable for the next iteration.
 
-[Source](./blob/master/2.rb)
+[Source](./src/002.rb)
 
 ## Problem 3: Largest prime factor
 
@@ -50,7 +50,7 @@ Some odd numbers are a composite number _c,_ but that is okay because we already
 
 An alternative approach would be to generate all the prime numbers up until the square root of _x,_ perhaps using something like the [sieve of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin), but for fun problems like this, I find it less fun to use someone else's algorithm when I'm not smart enough to derive it myself. Some other sieves are simpler, but they are still relatively verbose, I feel.
 
-[Source](./blob/master/3.rb)
+[Source](./src/003.rb)
 
 ## Problem 4: Largest palindrome product
 
@@ -64,6 +64,6 @@ The product verification function basically checks _x_ for a factor _f_ in [100,
 
 As for generating the next smallest palindrome, we're essentially decrementing the left half by 1, then mirroring it. Instead of simply starting with a 3-digit number and concatenating its reverse string, I did some mathy voodoo.
 
-[Source](./blob/master/4.rb)
+[Source](./src/004.rb)
 
 ## _More to come when I feel like it..._

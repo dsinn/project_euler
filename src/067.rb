@@ -1,4 +1,4 @@
-require_relative '18.rb'
+require_relative '018.rb'
 triangle = IO.readlines('triangle.txt').collect { |line|
     line.split(' ').collect{ |x| x.to_i }
 }

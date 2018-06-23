@@ -1,6 +1,6 @@
 # Project Euler solutions
 
-The following are Project Euler solutions that I wrote for fun in early–mid 2013 to familiarize myself with Ruby syntax.
+The following are [Project Euler](https://projecteuler.net/archives) solutions that I wrote for fun in early–mid 2013 to familiarize myself with Ruby syntax.
 
 While many others enjoyed writing clever one-liners or using pen and paper, I focused on a compromise between performance, simplicity, and readability.
 

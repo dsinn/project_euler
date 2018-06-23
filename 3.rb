@@ -2,7 +2,7 @@ x = 600851475143
 factors = []
 
 # Check if even
-if x & 1 == 0
+while (x & 1 == 0)
     x /= 2
     factors << 2
 end

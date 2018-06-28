@@ -1,5 +1,5 @@
 def is_divisible_by_triple_digits(x)
-    999.downto(Math.sqrt(x).floor) { |i|
+    999.step(Math.sqrt(x).floor, -1 - (x & 1)) { |i|
         if x % i == 0
             puts i.to_s + ' x ' + (x / i).to_s + ' = ' + x.to_s
             return true

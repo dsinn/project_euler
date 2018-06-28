@@ -8,11 +8,19 @@ while (x & 1 == 0)
 end
 
 operand = 3
-while (x > 1)
+sqrt_x = Math.sqrt(x).floor
+
+while (x > 1 && operand < sqrt_x)
     while (x % operand == 0)
         factors << operand
         x /= operand
+        sqrt_x = Math.sqrt(x).floor
     end
     operand += 2
 end
-puts factors.max
+
+if x > 1
+    factors << x
+end
+
+puts factors

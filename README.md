@@ -48,6 +48,8 @@ Since 2 is the only even prime number, it gets a special block at the front; the
 
 Some odd numbers are a composite number _c,_ but that is okay because we already divided by _c_'s prime factors earlier in the loop since we go through the numbers in ascending order.
 
+Once the operand is past the square root, we know that the only multiples are 1 and the number itself.
+
 An alternative approach would be to generate all the prime numbers up until the square root of _x,_ perhaps using something like the [sieve of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin), but for fun problems like this, I find it less fun to use someone else's algorithm when I'm not smart enough to derive it myself. Some other sieves are simpler, but they are still relatively verbose, I feel.
 
 [Source](./src/003.rb)

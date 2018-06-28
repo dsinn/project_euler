@@ -62,9 +62,12 @@ An alternative approach would be to generate all the prime numbers up until the 
 
 My goal was to optimize the search as much as possible. The general idea is to go down the palindromes in descending order, and stop as soon as we find a product of two 3-digit numbers. 999 is the largest 3-digit number, and 999<sup>2</sup> = 998001, so the largest palindrome smaller than that, 997799, is our starting point.
 
-The product verification function basically checks _x_ for a factor _f_ in [100, 999] such that _x_ ÷ _f_ is also in [100, 999]. We can optimize this in three ways: (i) Stop at sqrt(_x_); multiplication is commutative, so going past this would be redoing work. (ii) Go in descending order; because we are looking for the largest palindrome, sqrt(_x_) will probably be closer to 999 than to 100. (iii) If the palindrome is odd, only check for odd factors, because the product of an even number and any integer is even.
+The product verification function basically checks _x_ for a factor _f_ in [100, 999] such that _x_ ÷ _f_ is also in [100, 999]. We can optimize this in three ways:
+1. Stop at sqrt(_x_); multiplication is commutative, so going past this would be redoing work.
+2. Go in descending order; because we are looking for the largest palindrome, sqrt(_x_) will probably be closer to 999 than to 100.
+3. If the palindrome is odd, only check for odd factors, because the product of an even number and any integer is even.
 
-As for generating the next smallest palindrome, we're essentially decrementing the left half by 1, then mirroring it. Instead of simply starting with a 3-digit number and concatenating its reverse string, I did some mathy voodoo.
+As for generating the next smallest palindrome, we're essentially decrementing the left half by 1, then mirroring it. Instead of simply starting with a 3-digit number and concatenating its reverse string.
 
 [Source](./src/004.rb)
 

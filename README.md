@@ -71,4 +71,14 @@ As for generating the next smallest palindrome, we're essentially decrementing t
 
 [Source](./src/004.rb)
 
+## Problem 5: Smallest multiple
+
+> 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+>
+> What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+
+As per group theory, the lowest common multiple of _a_ and _b_, denoted lcm(_a_, _b_), is _ab_ / gcd(_a_, _b_), where gcd is the greatest common denominator of _a_ and _b_. We use the Euclidean algorithm to efficiently calculate the gcd, then take advantage of the fact that lcm(_a_, _b_, _c_) = lcm(lcm(_a_, _b_), c) and expand for 20 parameters.
+
+[Source](./src/005.rb)
+
 ## _More to come when I feel like it..._

@@ -81,4 +81,24 @@ As per group theory, the lowest common multiple of _a_ and _b_, denoted lcm(_a_,
 
 [Source](./src/005.rb)
 
+## Problem 6: Sum square difference
+
+> The sum of the squares of the first ten natural numbers is,
+>
+> 1<sup>2</sup> + 2<sup>2</sup> + ... + 10<sup>2</sup> = 385
+>
+> The square of the sum of the first ten natural numbers is,
+>
+> (1 + 2 + ... + 10)<sup>2</sup> = 552 = 3025
+>
+> Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025 − 385 = 2640.
+>
+> Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+
+For the sum of squares, each new term grows quadratically (1<sup>2</sup> = 1, 2<sup>2</sup> = 4, 3<sup>2</sup> = 9, ... are the values of x<sup>2</sup>), which means the sum grows cubically.  There are various methods to compute the exact cubic equation, but I used the [Lagrange polynomial](https://en.wikipedia.org/wiki/Lagrange_polynomial) with four data points to obtain x<sup>3</sup>/3 + x<sup>2</sup>/2 + x/6.  Because of floating point error, the division should be done last, or you risk computing the wrong answer, so I computed (2x<sup>3</sup> + 3x<sup>2</sup> + x) / 6 instead.
+
+For the square of the sum, the base is just an arithmetic series, so calculate the square of an [arithmetic sum](https://en.wikipedia.org/wiki/Arithmetic_progression#Sum).
+
+Each operand of the subtraction can therefore be computed in constant time, regardless of how many natural numbers you want.
+
 ## _More to come when I feel like it..._

@@ -101,4 +101,12 @@ For the square of the sum, the base is just an arithmetic series, so calculate t
 
 Each operand of the subtraction can therefore be computed in constant time, regardless of how many natural numbers you want.
 
+## Problem 7: 10001st prime
+
+> By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+>
+> What is the 10 001st prime number?
+
+As per [Rosser's theorem](https://en.wikipedia.org/wiki/Rosser's_theorem), an upper bound for _π_(_x_) is _x_(log _x_ + log log _x_), so use a high-performance sieve such as [that of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin) to find all of the primes up to it, then count the result up to the 10001st.   
+
 ## _More to come when I feel like it..._

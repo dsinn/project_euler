@@ -1,11 +1,7 @@
 require_relative 'projecteuler.rb'
 
-first = 0
-for i in 1 .. 100
-    first += i * i
-end
+x = 100
+sumOfSquares = (2 * x ** 3 + 3 * x ** 2 + x) / 6
+squareOfSum = arithmetic_series_sum(1, x, 1) ** 2
 
-second = arithmetic_series_sum(1, 100, 1)
-second *= second
-
-puts second - first
+puts squareOfSum - sumOfSquares

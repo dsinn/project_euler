@@ -20,28 +20,28 @@ s = '
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450
 '
-s = s.gsub(/\D/, '')
-groups = s.split(/0+/)
+adjacent_digits = 13
+groups = s.gsub(/\D/, '').split(/0+/)
+
 max_product = 0
 
 groups.each do |group|
-    v = []
-    for i in 0 .. group.length - 1
-        v << group[i].to_i
-    end
+    if group.length >= adjacent_digits
+        v = []
+        for i in 0 .. group.length - 1
+            v << group[i].to_i
+        end
 
-    if v.length < 5
-        product = v[0]
-        for i in 1 .. v.length - 1
+        product = 1
+        for i in 0 .. adjacent_digits - 1
             product *= v[i]
         end
         if max_product < product
             max_product = product
         end
-    else
-        product = v[0] * v[1] * v[2] * v[3] * v[4]
-        for i in 5 .. v.length - 1
-            product = product * v[i] / v[i - 5]
+
+        for i in adjacent_digits .. v.length - 1
+            product = product / v[i - adjacent_digits] * v[i]
             if max_product < product
                 max_product = product
             end

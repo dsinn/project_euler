@@ -1,15 +1,8 @@
-squares = Array.new(1000) { |i| i * i }
-stop = false
-for i in 1 .. 999
-    if stop
-        break
-    end
-    for j in i .. (999 - i) / 2
-        k = 1000 - i - j
-        if squares[i] + squares[j] == squares[k]
-            puts i, j, k, i * j * k
-            stop = true
-            break
-        end
+for a in 1 .. 500
+    if (500000 - 1000 * a) % (1000 - a) == 0
+        b = (500000 - 1000 * a) / (1000 - a)
+        c = 1000 - a - b
+        puts a, b, c, a * b * c
+        exit
     end
 end

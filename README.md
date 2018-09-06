@@ -141,4 +141,20 @@ Because the product of any integer and 0 is 0, this can be optimized by splittin
 
 Then, for each of the remaining substrings, compute the product of the first 13 digits, and check if this exceeds the largest product so far. When traversing through the substring, divide the current product by the leftmost digit, multiply by the next digit to the right, and check the max product until you reach the end of the substring.
 
+## Problem 9: Special Pythagorean triplet
+
+> A Pythagorean triplet is a set of three natural numbers, _a_ < _b_ < _c_, for which,
+a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>
+>
+>For example, 32 + 42 = 9 + 16 = 25 = 52.
+>
+>There exists exactly one Pythagorean triplet for which _a_ + _b_ + _c_ = 1000.
+Find the product _abc_.
+
+In order to avoid nested loops, which would hurt performance, we can use some algebra.
+
+Since we're given _a_<sup>2</sup> + _b_<sup>2</sup> = _c_<sup>2</sup> and _a_ + _b_ + _c_ = 100, we can solve for a specific variable in each equation; for example, _c_ = 1000 - _a_ - _b_. After squaring the trinomial and substituting the Pythagorean equation, we have _a_<sup>2</sup> + _b_<sup>2</sup> = 1000000 + _a_<sup>2</sup> + _b_<sup>2</sup> - 2000 _a_ - 2000 _b_ + 2 _ab_. Solve for _b_, and we have _b_ = (500000 - 1000 _a_) / (1000 - _a_).
+
+Since _a_, _b_ and _c_ are integers, the first _a_ such that 1000 - _a_ divides 500000 - 1000 _a_ (the denominator and numerator of _b_, respectively) is the answer.  
+
 ## _More to come when I feel like it..._

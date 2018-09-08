@@ -157,4 +157,12 @@ Since we're given _a_<sup>2</sup> + _b_<sup>2</sup> = _c_<sup>2</sup> and _a_ + 
 
 Since _a_, _b_ and _c_ are integers, the first _a_ such that 1000 - _a_ divides 500000 - 1000 _a_ (the denominator and numerator of _b_, respectively) is the answer.  
 
+## Problem 10: Summation of primes
+
+> The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+>
+> Find the sum of all the primes below two million.
+
+Use a high-performance sieve such as [that of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin), then iterate over the result.  Since 2 is the only even prime, a minor optimization can be done by checking only odd numbers.
+
 ## _More to come when I feel like it..._

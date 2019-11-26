@@ -101,6 +101,8 @@ For the square of the sum, the base is just an arithmetic series, so calculate t
 
 Each operand of the subtraction can therefore be computed in constant time, regardless of how many natural numbers you want.
 
+[Source](./src/006.rb)
+
 ## Problem 7: 10001st prime
 
 > By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
@@ -108,6 +110,8 @@ Each operand of the subtraction can therefore be computed in constant time, rega
 > What is the 10 001st prime number?
 
 As per [Rosser's theorem](https://en.wikipedia.org/wiki/Rosser's_theorem), an upper bound for _π_(_x_) is _x_(log _x_ + log log _x_), so use a high-performance sieve such as [that of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin) to find all of the primes up to it, then count the result up to the 10001st.
+
+[Source](./src/007.rb)
 
 ## Problem 8: Largest product in a series
 
@@ -141,6 +145,8 @@ Because the product of any integer and 0 is 0, this can be optimized by splittin
 
 Then, for each of the remaining substrings, compute the product of the first 13 digits, and check if this exceeds the largest product so far. When traversing through the substring, divide the current product by the leftmost digit, multiply by the next digit to the right, and check the max product until you reach the end of the substring.
 
+[Source](./src/008.rb)
+
 ## Problem 9: Special Pythagorean triplet
 
 > A Pythagorean triplet is a set of three natural numbers, _a_ < _b_ < _c_, for which,
@@ -155,7 +161,9 @@ In order to avoid nested loops, which would hurt performance, we can use some al
 
 Since we're given _a_<sup>2</sup> + _b_<sup>2</sup> = _c_<sup>2</sup> and _a_ + _b_ + _c_ = 100, we can solve for a specific variable in each equation; for example, _c_ = 1000 - _a_ - _b_. After squaring the trinomial and substituting the Pythagorean equation, we have _a_<sup>2</sup> + _b_<sup>2</sup> = 1000000 + _a_<sup>2</sup> + _b_<sup>2</sup> - 2000 _a_ - 2000 _b_ + 2 _ab_. Solve for _b_, and we have _b_ = (500000 - 1000 _a_) / (1000 - _a_).
 
-Since _a_, _b_ and _c_ are integers, the first _a_ such that 1000 - _a_ divides 500000 - 1000 _a_ (the denominator and numerator of _b_, respectively) is the answer.  
+Since _a_, _b_ and _c_ are integers, the first _a_ such that 1000 - _a_ divides 500000 - 1000 _a_ (the denominator and numerator of _b_, respectively) is the answer.
+
+[Source](./src/009.rb)
 
 ## Problem 10: Summation of primes
 
@@ -164,6 +172,8 @@ Since _a_, _b_ and _c_ are integers, the first _a_ such that 1000 - _a_ divides 
 > Find the sum of all the primes below two million.
 
 Use a high-performance sieve such as [that of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin), then iterate over the result.  Since 2 is the only even prime, a minor optimization can be done by checking only odd numbers.
+
+[Source](./src/010.rb)
 
 ## Problem 11: Largest product in a grid
 
@@ -193,5 +203,7 @@ Use a high-performance sieve such as [that of Atkin](https://en.wikipedia.org/wi
 > What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
 
 Brute force: iterate through each row, column, and diagonal.
+
+[Source](./src/011.rb)
 
 ## _More to come when I feel like it..._

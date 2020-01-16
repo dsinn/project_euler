@@ -100,8 +100,8 @@ s = '37107287533902102798797998220837590246510135740250
 53503534226472524250874054075591789781264330331690'
 lines = s.split(/\r?\n/)
 
-total = 0.0
+total = 0
 lines.each do |line|
-    total += line.to_f
+    total += line.to_i
 end
-puts total
+puts total.to_s[0, 10]

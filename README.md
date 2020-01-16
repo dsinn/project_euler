@@ -234,4 +234,14 @@ Since the number of divisors will need to be calculated for a large amount of nu
 
 [Source](./src/012.rb)
 
+## Problem 13: Large sum
+
+> Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
+>
+> [_Redacted; it's really long, so see [the official page](https://projecteuler.net/problem=13) if you really need to._]
+
+With many languages, the operands are so large that native integers are susceptible to [integer overflow](https://en.wikipedia.org/wiki/Integer_overflow), and floats are used instead, then they are susceptible to [arithmetic underflow](https://en.wikipedia.org/wiki/Arithmetic_underflow). Fortunately for those who used Ruby, that language's integers handle overflow natively.
+
+[Source](./src/013.rb)
+
 ## _More to come when time allows..._

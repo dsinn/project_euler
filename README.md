@@ -288,4 +288,16 @@ Thanks to Ruby's handling of big integers, this is extremely trivial. Compute th
 
 [Source](./src/016.rb)
 
+## Problem 17: Number letter counts
+
+> If the numbers 1 to 5 are written out in words: one, two, three, four, five, then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
+>
+> If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?
+>
+> **NOTE:** Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. The use of "and" when writing out numbers is in compliance with British usage.
+
+English numbers aren't the most predictable, so we have to split them up into groups such that each member of the group follows the same pattern. I used 1–19, 20–99, 100–999, and 1000, with each group other than the first making use of previous group(s). Thankfully we don't need to go beyond 1000, because figuring out when to include "and" would be more complicated.
+
+[Source](./src/017.rb)
+
 ## _More to come when time allows..._

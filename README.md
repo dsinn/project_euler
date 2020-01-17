@@ -275,4 +275,17 @@ This is a combinatorics problem: you need to go right 20 times and down 20 times
 
 [Source](./src/015.rb)
 
+## Problem 16: Power digit sum
+
+> 2<sup>15</sup> = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
+>
+> What is the sum of the digits of the number 2<sup>1000</sup>?
+
+Thanks to Ruby's handling of big integers, this is extremely trivial. Compute the power, convert it to a string, convert each character to an integer and sum it up.
+
+- A math-ier solution without strings would be to add the modulo 10's and divide the power by 10 in a loop until the quotient becomes zero; however, in my attempt, it was actually slower than string conversion.
+- My solution contains a minor optimization: `2 << 999` is about five times faster than `2 ** 1000`, saving a whopping ~1 μs on my machine.
+
+[Source](./src/016.rb)
+
 ## _More to come when time allows..._

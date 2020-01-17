@@ -3,7 +3,7 @@ key_length = 3
 key_min = 'a'.ord
 key_max = 'z'.ord
 
-content = IO.readlines('cipher1.txt')
+content = IO.readlines(__dir__ + '/cipher1.txt')
 values = content[0].split(',')
 buckets = Array.new(key_length) {[]}
 

@@ -1,6 +1,6 @@
 t0 = Time.now
 
-matrix = IO.readlines('matrix.txt').collect { |line|
+matrix = IO.readlines(__dir__ + '/matrix.txt').collect { |line|
     line.split(',').collect{|x| x.to_i}
 }
 

@@ -1,5 +1,5 @@
 require_relative '018.rb'
-triangle = IO.readlines('triangle.txt').collect { |line|
+triangle = IO.readlines(__dir__ + '/triangle.txt').collect { |line|
     line.split(' ').collect{ |x| x.to_i }
 }
 

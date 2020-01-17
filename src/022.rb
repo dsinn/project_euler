@@ -1,4 +1,4 @@
-content = IO.readlines('names.txt')
+content = IO.readlines(__dir__ + '/names.txt')
 names = content[0].gsub('"', '').split(',').sort
 names.insert(0, '')
 

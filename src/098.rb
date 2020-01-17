@@ -27,7 +27,7 @@ def convert_from_hash(s, replacements)
     code
 end
 
-words = IO.readlines('words.txt')[0].split(',').collect {|word| word[1 .. -2]}#.delete_if {|word| word.length > 5}
+words = IO.readlines(__dir__ + '/words.txt')[0].split(',').collect {|word| word[1 .. -2]}#.delete_if {|word| word.length > 5}
 word_anagram_groups = Array.new(words.max_by {|word| word.length}.length + 1) {[]} # index == length of each string
 cache = Hash.new # Cache sorted strings
 words.each do |word|

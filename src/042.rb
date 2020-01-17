@@ -1,4 +1,4 @@
-content = IO.readlines('words.txt')
+content = IO.readlines(__dir__ + '/words.txt')
 words = content[0].gsub('"', '').split(',')
 
 triangles = Hash.new

@@ -1,6 +1,6 @@
 t0 = Time.now
 
-matrix = IO.readlines('matrix.txt').collect { |line|
+matrix = IO.readlines(__dir__ + '/matrix.txt').collect { |line|
     line.split(',').collect{|x| x.to_i}
 }
 max_int = 2147483647 # Assume the input values aren't huge

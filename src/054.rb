@@ -143,7 +143,7 @@ def hand_value(h)
 end
 
 count = 0
-hands = IO.readlines('poker.txt')
+hands = IO.readlines(__dir__ + '/poker.txt')
 hands.each do |hand|
     p1 = hand.split(' ').map! { |card| encode(card) }
     p2 = p1.slice!(5 .. 9).sort

@@ -3,7 +3,7 @@ t0 = Time.now
 h = Hash.new
 
 # Track which digits precede the others
-IO.readlines('keylog.txt').uniq.each do |line|
+IO.readlines(__dir__ + '/keylog.txt').uniq.each do |line|
     digits = line.chomp.split('')
 
     digits.each do |d|

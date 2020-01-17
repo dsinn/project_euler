@@ -6,6 +6,13 @@ While many others enjoyed writing clever one-liners or using pen and paper, I fo
 
 As much as I enjoyed using LaTeX in university, I'd rather just take advantage of GitHub's markdown renderer and work on a single file instead of working on a file that would be difficult for laymen to follow, then having to render and upload the result, so voilà...
 
+## Index
+
+| | | | | | | | | | |
+|-|-|-|-|-|-|-|-|-|-|
+[1](#problem-1-multiples-of-3-and-5) | [2](#problem-2-even-fibonacci-numbers) | [3](#problem-3-largest-prime-factor) | [4](#problem-4-largest-palindrome-product) | [5](#problem-5-smallest-multiple) | [6](#problem-6-sum-square-difference) | [7](#problem-7-10001st-prime) | [8](#problem-8-largest-product-in-a-series) | [9](#problem-9-special-pythagorean-triplet) | [10](#problem-10-summation-of-primes)
+[11](#problem-11-largest-product-in-a-grid) | [12](#problem-12-highly-divisible-triangular-number) | [13](#problem-13-large-sum) | [14](#problem-14-longest-collatz-sequence) | [15](#problem-15-lattice-paths) | [16](#problem-16-power-digit-sum) | [17](#problem-17-number-letter-counts) | [18](#problem-18-maximum-path-sum-i) | [19](#problem-19-counting-sundays)
+
 ## Problem 1: Multiples of 3 and 5
 
 > If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
@@ -14,7 +21,7 @@ As much as I enjoyed using LaTeX in university, I'd rather just take advantage o
 
 My goal was to compute this in constant time, which can be done by adding the [arithmetic sums](https://en.wikipedia.org/wiki/Arithmetic_progression#Sum) of the 3's and 5's, then subtracting the 15's (lowest common multiple of 3 and 5) to negate the double-counting.
 
-[Source](./src/001.rb)
+[Source](./src/001.rb) | [Back to Index](#index)
 
 ## Problem 2: Even Fibonacci numbers
 
@@ -32,7 +39,7 @@ Because of the properties of addition with odd and even numbers, every third Fib
 
 It's good to store x<sub>i+2</sub> in a variable for the next iteration.
 
-[Source](./src/002.rb)
+[Source](./src/002.rb) | [Back to Index](#index)
 
 ## Problem 3: Largest prime factor
 
@@ -52,7 +59,7 @@ Once the operand is past the square root, we know that the only multiples are 1 
 
 An alternative approach would be to generate all the prime numbers up until the square root of _x,_ perhaps using something like the [sieve of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin), but for fun problems like this, I find it less fun to use someone else's algorithm when I'm not smart enough to derive it myself. Some other sieves are simpler, but they are still relatively verbose, I feel.
 
-[Source](./src/003.rb)
+[Source](./src/003.rb) | [Back to Index](#index)
 
 ## Problem 4: Largest palindrome product
 
@@ -69,7 +76,7 @@ The product verification function basically checks _x_ for a factor _f_ in [100,
 
 As for generating the next smallest palindrome, we're essentially decrementing the left half by 1, then mirroring it. Instead of simply starting with a 3-digit number and concatenating its reverse string.
 
-[Source](./src/004.rb)
+[Source](./src/004.rb) | [Back to Index](#index)
 
 ## Problem 5: Smallest multiple
 
@@ -79,7 +86,7 @@ As for generating the next smallest palindrome, we're essentially decrementing t
 
 As per group theory, the lowest common multiple of _a_ and _b_, denoted lcm(_a_, _b_), is _ab_ / gcd(_a_, _b_), where gcd is the greatest common denominator of _a_ and _b_. We use the Euclidean algorithm to efficiently calculate the gcd, then take advantage of the fact that lcm(_a_, _b_, _c_) = lcm(lcm(_a_, _b_), c) and expand for 20 parameters.
 
-[Source](./src/005.rb)
+[Source](./src/005.rb) | [Back to Index](#index)
 
 ## Problem 6: Sum square difference
 
@@ -101,7 +108,7 @@ For the square of the sum, the base is just an arithmetic series, so calculate t
 
 Each operand of the subtraction can therefore be computed in constant time, regardless of how many natural numbers you want.
 
-[Source](./src/006.rb)
+[Source](./src/006.rb) | [Back to Index](#index)
 
 ## Problem 7: 10001st prime
 
@@ -111,7 +118,7 @@ Each operand of the subtraction can therefore be computed in constant time, rega
 
 As per [Rosser's theorem](https://en.wikipedia.org/wiki/Rosser's_theorem), an upper bound for _π_(_x_) is _x_(log _x_ + log log _x_), so use a high-performance sieve such as [that of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin) to find all of the primes up to it, then count the result up to the 10001st.
 
-[Source](./src/007.rb)
+[Source](./src/007.rb) | [Back to Index](#index)
 
 ## Problem 8: Largest product in a series
 
@@ -145,7 +152,7 @@ Because the product of any integer and 0 is 0, this can be optimized by splittin
 
 Then, for each of the remaining substrings, compute the product of the first 13 digits, and check if this exceeds the largest product so far. When traversing through the substring, divide the current product by the leftmost digit, multiply by the next digit to the right, and check the max product until you reach the end of the substring.
 
-[Source](./src/008.rb)
+[Source](./src/008.rb) | [Back to Index](#index)
 
 ## Problem 9: Special Pythagorean triplet
 
@@ -163,7 +170,7 @@ Since we're given _a_<sup>2</sup> + _b_<sup>2</sup> = _c_<sup>2</sup> and _a_ + 
 
 Since _a_, _b_ and _c_ are integers, the first _a_ such that 1000 - _a_ divides 500000 - 1000 _a_ (the denominator and numerator of _b_, respectively) is the answer.
 
-[Source](./src/009.rb)
+[Source](./src/009.rb) | [Back to Index](#index)
 
 ## Problem 10: Summation of primes
 
@@ -173,7 +180,7 @@ Since _a_, _b_ and _c_ are integers, the first _a_ such that 1000 - _a_ divides 
 
 Use a high-performance sieve such as [that of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin), then iterate over the result.  Since 2 is the only even prime, a minor optimization can be done by checking only odd numbers.
 
-[Source](./src/010.rb)
+[Source](./src/010.rb) | [Back to Index](#index)
 
 ## Problem 11: Largest product in a grid
 
@@ -204,7 +211,7 @@ Use a high-performance sieve such as [that of Atkin](https://en.wikipedia.org/wi
 
 Brute force: iterate through each row, column, and diagonal. Optimizations similar to Problem #8 could be done, but with only four operands, I didn't bother.
 
-[Source](./src/011.rb)
+[Source](./src/011.rb) | [Back to Index](#index)
 
 ## Problem 12: Highly divisible triangular number
 
@@ -232,7 +239,7 @@ Brute force: iterate through each row, column, and diagonal. Optimizations simil
 
 Since the number of divisors will need to be calculated for a large amount of numbers, [Euler's totient function](https://en.wikipedia.org/wiki/Euler%27s_totient_function) provides a fast way to compute such values, and the function makes use of previous results to improve performance, I wrote a [Divisors class](./src/divisors.rb) for it. With that class doing the heavy lifting, the rest of the script simply iterates through triangle numbers in a fairly memory-efficient manner until a number with a sufficiently large number of divisors is found.
 
-[Source](./src/012.rb)
+[Source](./src/012.rb) | [Back to Index](#index)
 
 ## Problem 13: Large sum
 
@@ -242,7 +249,7 @@ Since the number of divisors will need to be calculated for a large amount of nu
 
 With many languages, the operands are so large that native integers are susceptible to [integer overflow](https://en.wikipedia.org/wiki/Integer_overflow), and floats are used instead, then they are susceptible to [arithmetic underflow](https://en.wikipedia.org/wiki/Arithmetic_underflow). Fortunately for those who used Ruby, that language's integers handle overflow natively.
 
-[Source](./src/013.rb)
+[Source](./src/013.rb) | [Back to Index](#index)
 
 ## Problem 14: Longest Collatz sequence
 
@@ -263,7 +270,7 @@ With many languages, the operands are so large that native integers are suscepti
 
 Computing the length of the chain for a given number is fairly straightforward, so the main point of interest is the optimization. As we go through a chain, once we encounter a previously seen result, then we can use that result to determine the Collatz chain length of everything from the beginning of the chain up to that point, and cache the new results without having to do any further computation for the remainder of the chain.
 
-[Source](./src/014.rb)
+[Source](./src/014.rb) | [Back to Index](#index)
 
 ## Problem 15: Lattice paths
 
@@ -273,7 +280,7 @@ Computing the length of the chain for a given number is fairly straightforward, 
 
 This is a combinatorics problem: you need to go right 20 times and down 20 times; how many different ways are there to do so? In other words, you have to move 40 times, and 20 of those are "right" (or alternatively, 20 of those are "down"), hence the answer is "40 choose 20" or 40! / (20! · 20!). I wrote a [Combinatorics class](./src/combinatorics.rb) to facilitate the computation of factorials, combinations, and [permutations](https://en.wikipedia.org/wiki/Permutation), with some optimizations to reduce the number of multiplication operations since factorial is a linear-time function.
 
-[Source](./src/015.rb)
+[Source](./src/015.rb) | [Back to Index](#index)
 
 ## Problem 16: Power digit sum
 
@@ -286,7 +293,7 @@ Thanks to Ruby's handling of big integers, this is extremely trivial. Compute th
 - A math-ier solution without strings would be to add the modulo 10's and divide the power by 10 in a loop until the quotient becomes zero; however, in my attempt, it was actually slower than string conversion.
 - My solution contains a minor optimization: `2 << 999` is about five times faster than `2 ** 1000`, saving a whopping ~1 μs on my machine.
 
-[Source](./src/016.rb)
+[Source](./src/016.rb) | [Back to Index](#index)
 
 ## Problem 17: Number letter counts
 
@@ -298,7 +305,7 @@ Thanks to Ruby's handling of big integers, this is extremely trivial. Compute th
 
 English numbers aren't the most predictable, so we have to split them up into groups such that each member of the group follows the same pattern. I used 1–19, 20–99, 100–999, and 1000, with each group other than the first making use of previous group(s). Thankfully we don't need to go beyond 1000, because figuring out when to include "and" would be more complicated.
 
-[Source](./src/017.rb)
+[Source](./src/017.rb) | [Back to Index](#index)
 
 ## Problem 18: Maximum path sum I
 
@@ -337,7 +344,7 @@ English numbers aren't the most predictable, so we have to split them up into gr
 
 The clever method they are probably referring to is dynamic programming. Since the path always goes down one row with at most two choices at each step, we can iterate through each row, and store the value of the optimal path up to each node of that row by using the stored optimal values of the previous row. Of course, there is no previous row relative to the first, so we initialize the optimal value of that row as just 75 itself.
 
-[Source](./src/018.rb)
+[Source](./src/018.rb) | [Back to Index](#index)
 
 ## Problem 19: Counting Sundays
 
@@ -371,6 +378,6 @@ As for the optimizations:
 
 In order to fully generalize this problem and solve it in constant time, similar methods could be used, but you would need special logic to handle optimization 1 around multiples of 100 years until you've counted 2800 years.
 
-[Source](./src/019.rb)
+[Source](./src/019.rb) | [Back to Index](#index)
 
 ## _More to come when time allows..._

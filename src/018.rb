@@ -10,7 +10,7 @@ def max_triangle_path_sum(triangle)
         maxes[i] = prev_maxes[i - 1] + row[i]
 
         for j in 1 .. i - 1
-            maxes[j] = row[j] + (prev_maxes[j] > prev_maxes[j - 1] ? prev_maxes[j] : prev_maxes[j - 1])
+            maxes[j] = row[j] + [prev_maxes[j], prev_maxes[j - 1]].max
         end
     end
     maxes.max

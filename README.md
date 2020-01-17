@@ -12,6 +12,7 @@ As much as I enjoyed using LaTeX in university, I'd rather just take advantage o
 |-|-|-|-|-|-|-|-|-|-|
 [1](#problem-1-multiples-of-3-and-5) | [2](#problem-2-even-fibonacci-numbers) | [3](#problem-3-largest-prime-factor) | [4](#problem-4-largest-palindrome-product) | [5](#problem-5-smallest-multiple) | [6](#problem-6-sum-square-difference) | [7](#problem-7-10001st-prime) | [8](#problem-8-largest-product-in-a-series) | [9](#problem-9-special-pythagorean-triplet) | [10](#problem-10-summation-of-primes)
 [11](#problem-11-largest-product-in-a-grid) | [12](#problem-12-highly-divisible-triangular-number) | [13](#problem-13-large-sum) | [14](#problem-14-longest-collatz-sequence) | [15](#problem-15-lattice-paths) | [16](#problem-16-power-digit-sum) | [17](#problem-17-number-letter-counts) | [18](#problem-18-maximum-path-sum-i) | [19](#problem-19-counting-sundays) | [20](#problem-20-factorial-digit-sum)
+[21](#problem-21-amicable-numbers) |
 
 ## Problem 1: Multiples of 3 and 5
 
@@ -392,5 +393,18 @@ In order to fully generalize this problem and solve it in constant time, similar
 Like before, Ruby already solves integer overflow, and I'm not aware of any way to optimize factorials, so my solution is very straightforward.
 
 [Source](./src/020.rb) | [Back to Index](#index)
+
+## Problem 21: Amicable numbers
+
+> Let _d_(n) be defined as the sum of proper divisors of _n_ (numbers less than _n_ which divide evenly into _n_).\
+> If _d_(_a_) = _b_ and _d_(_b_) = _a_, where _a_ ≠ _b_, then _a_ and _b_ are an amicable pair and each of _a_ and _b_ are called amicable numbers.
+>
+> For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore _d_(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and 142; so _d_(284) = 220.
+>
+> Evaluate the sum of all the amicable numbers under 10000.
+
+The trick is to not fall into the trap of doing any division or prime number checks whatsoever. Since we need to check _d_(_n_) for every 1 ≤ _n_ ≤ 10000, we could simply compute the entire function prior to doing any amicable pair checks. Initializing _d_(_n_) = 1, and then for every integer _i_ up to 5000, increment _d_(_i_) by _i_, _d_(2i) by _i_, …, _d_(10000 - 10000 % _i_) by _i_. After _d_ is taken care of, the rest is relatively straightforward, but note that if _d_[_a_] = _a_, then _a_ is not part of an amicable pair, because something cannot be paired with itself.
+
+[Source](./src/021.rb) | [Back to Index](#index)
 
 ## _More to come when time allows..._

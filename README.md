@@ -11,7 +11,7 @@ As much as I enjoyed using LaTeX in university, I'd rather just take advantage o
 | | | | | | | | | | |
 |-|-|-|-|-|-|-|-|-|-|
 [1](#problem-1-multiples-of-3-and-5) | [2](#problem-2-even-fibonacci-numbers) | [3](#problem-3-largest-prime-factor) | [4](#problem-4-largest-palindrome-product) | [5](#problem-5-smallest-multiple) | [6](#problem-6-sum-square-difference) | [7](#problem-7-10001st-prime) | [8](#problem-8-largest-product-in-a-series) | [9](#problem-9-special-pythagorean-triplet) | [10](#problem-10-summation-of-primes)
-[11](#problem-11-largest-product-in-a-grid) | [12](#problem-12-highly-divisible-triangular-number) | [13](#problem-13-large-sum) | [14](#problem-14-longest-collatz-sequence) | [15](#problem-15-lattice-paths) | [16](#problem-16-power-digit-sum) | [17](#problem-17-number-letter-counts) | [18](#problem-18-maximum-path-sum-i) | [19](#problem-19-counting-sundays)
+[11](#problem-11-largest-product-in-a-grid) | [12](#problem-12-highly-divisible-triangular-number) | [13](#problem-13-large-sum) | [14](#problem-14-longest-collatz-sequence) | [15](#problem-15-lattice-paths) | [16](#problem-16-power-digit-sum) | [17](#problem-17-number-letter-counts) | [18](#problem-18-maximum-path-sum-i) | [19](#problem-19-counting-sundays) | [20](#problem-20-factorial-digit-sum)
 
 ## Problem 1: Multiples of 3 and 5
 
@@ -379,5 +379,18 @@ As for the optimizations:
 In order to fully generalize this problem and solve it in constant time, similar methods could be used, but you would need special logic to handle optimization 1 around multiples of 100 years until you've counted 2800 years.
 
 [Source](./src/019.rb) | [Back to Index](#index)
+
+## Problem 20: Factorial digit sum
+
+> _n_! means _n_ × (_n_ − 1) × ... × 3 × 2 × 1
+>
+> For example, 10! = 10 × 9 × ... × 3 × 2 × 1 = 3628800,\
+> and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
+>
+> Find the sum of the digits in the number 100!
+
+Like before, Ruby already solves integer overflow, and I'm not aware of any way to optimize factorials, so my solution is very straightforward.
+
+[Source](./src/020.rb) | [Back to Index](#index)
 
 ## _More to come when time allows..._

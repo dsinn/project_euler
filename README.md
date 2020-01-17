@@ -339,4 +339,38 @@ The clever method they are probably referring to is dynamic programming. Since t
 
 [Source](./src/018.rb)
 
+## Problem 19: Counting Sundays
+
+> You are given the following information, but you may prefer to do some research for yourself.
+>
+> - 1 Jan 1900 was a Monday.
+> - Thirty days has September,\
+>   April, June and November.\
+>   All the rest have thirty-one,\
+>   Saving February alone,\
+>   Which has twenty-eight, rain or shine.\
+>   And on leap years, twenty-nine.
+> - A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.
+>
+> How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+
+Similar to my solution to [Problem 1](#problem-1-multiples-of-3-and-5), while a brute-force solution is already fast, there are certainly opportunities for optimization. In fact, it's possible to compute the answer for any Gregorian year range in constant time, and although I didn't take my solution _that_ far, it does provide the proof of concept that can be extended for a generalized, constant-time solution.
+
+My solution purposely avoids the following, which I've seen others use:
+- [Zeller's congruence](https://en.wikipedia.org/wiki/Zeller%27s_congruence), because it's completely unnecessary when we were already told in the problem itself that January 1, 1900, is a Monday.
+- Any datetime libraries, because they evade a big chunk of the math aspect in this problem.
+
+Now, let's go over how to count the number of months that start with Sunday. I'm using the `day` variable to store how many days have passed since the beginning of January 1, 1900, so "day 0" is a Monday. That means it's a Sunday whenever `day % 7 == 6`. I also have an array containing the number of days in each month for non–leap years. Since the problem asks us to start counting at year 1901, I skip ahead by summing up the number of days in the aforementioned array (1900 is not a leap year). Here's where the counting begins.
+
+At the beginning of each month, we check `day % 7` and increment the count if it's a Sunday. Then we jump to the 1st of next month by adding the number of days using the array. Add an extra day when it's February on a leap year. In the brute-force approach, this can be done all the way up to the end of the year 2000.
+
+As for the optimizations:
+- Optimization 1: Store the number of months that start with Sunday in a 28-year period. A leap year occurs every 4 years and there are 7 days in a week, resulting in a period of `lcm(7, 4) = 28` years. That means January 1 of 1901, 1929, 1957, 1985, etc., are all the same day of the week until after the year 2100, because that is not a leap year as per the rules. Fortunately for this problem, we don't even come close to that, so after counting the number of months that start on a Sunday from 1901–28, we can multiply the count by 3 and skip ahead to 1985. Even if we were to stop the optimizations there, we already cut down the number of months checked from 1200 to 528 (56% reduction).
+- Optimization 2: With only the previous optimization, we would have to iterate through each month from 1985 to 2000. This is actually not necessary because 1985–2000 is the same as 1901–1916 (28 × 3 = 84 years before), which we already calculated. If we store the count at the end of 1916, then we can simply add that to the count at the end of 1984 for our final answer. This cuts down the number of month checks to 336 (72% less than the brute force).
+- Optimization 3: Cache the count for each day of the week that a year can start with, for both leap years and non–leap years. The process of computing the first 28 years now involves 14 cache hits and 14 cache misses, cutting down the number of month checks by another half to 168 overall (86% less than brute force).
+
+In order to fully generalize this problem and solve it in constant time, similar methods could be used, but you would need special logic to handle optimization 1 around multiples of 100 years until you've counted 2800 years.
+
+[Source](./src/019.rb)
+
 ## _More to come when time allows..._

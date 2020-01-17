@@ -265,4 +265,14 @@ Computing the length of the chain for a given number is fairly straightforward, 
 
 [Source](./src/014.rb)
 
+## Problem 15: Lattice paths
+
+> Starting in the top left corner of a 2×2 grid, and only being able to move to the right and down, there are exactly 6 routes to the bottom right corner.
+>
+> How many such routes are there through a 20×20 grid?
+
+This is a combinatorics problem: you need to go right 20 times and down 20 times; how many different ways are there to do so? In other words, you have to move 40 times, and 20 of those are "right" (or alternatively, 20 of those are "down"), hence the answer is "40 choose 20" or 40! / (20! · 20!). I wrote a [Combinatorics class](./src/combinatorics.rb) to facilitate the computation of factorials, combinations, and [permutations](https://en.wikipedia.org/wiki/Permutation), with some optimizations to reduce the number of multiplication operations since factorial is a linear-time function.
+
+[Source](./src/015.rb)
+
 ## _More to come when time allows..._

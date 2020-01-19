@@ -1,13 +1,7 @@
 content = IO.readlines(__dir__ + '/names.txt')
-names = content[0].gsub('"', '').split(',').sort
+names = content[0].gsub(/[^A-Za-z,]/, '').upcase.split(',').sort
 names.insert(0, '')
 
-sum = 0
-names.each_with_index { |name, i|
-    score = 0
-    name.split('').each { |c|
-        score += c.ord - 64
-    }
-    sum += score * i
+puts names.each_with_index.reduce(0) { |total_score, (name, rank)|
+    total_score + rank * (name.split('').reduce(0) { |name_score, char| name_score + char.ord } - 64 * name.length)
 }
-puts sum

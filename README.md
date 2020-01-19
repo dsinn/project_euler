@@ -12,7 +12,7 @@ As much as I enjoyed using LaTeX in university, I'd rather just take advantage o
 |-|-|-|-|-|-|-|-|-|-|
 [1](#problem-1-multiples-of-3-and-5) | [2](#problem-2-even-fibonacci-numbers) | [3](#problem-3-largest-prime-factor) | [4](#problem-4-largest-palindrome-product) | [5](#problem-5-smallest-multiple) | [6](#problem-6-sum-square-difference) | [7](#problem-7-10001st-prime) | [8](#problem-8-largest-product-in-a-series) | [9](#problem-9-special-pythagorean-triplet) | [10](#problem-10-summation-of-primes)
 [11](#problem-11-largest-product-in-a-grid) | [12](#problem-12-highly-divisible-triangular-number) | [13](#problem-13-large-sum) | [14](#problem-14-longest-collatz-sequence) | [15](#problem-15-lattice-paths) | [16](#problem-16-power-digit-sum) | [17](#problem-17-number-letter-counts) | [18](#problem-18-maximum-path-sum-i) | [19](#problem-19-counting-sundays) | [20](#problem-20-factorial-digit-sum)
-[21](#problem-21-amicable-numbers) |
+[21](#problem-21-amicable-numbers) | [22](#problem-22-names-scores)
 
 ## Problem 1: Multiples of 3 and 5
 
@@ -406,5 +406,24 @@ Like before, Ruby already solves integer overflow, and I'm not aware of any way 
 The trick is to not fall into the trap of doing any division or prime number checks whatsoever. Since we need to check _d_(_n_) for every 1 ≤ _n_ ≤ 10000, we could simply compute the entire function prior to doing any amicable pair checks. Initializing _d_(_n_) = 1, and then for every integer _i_ up to 5000, increment _d_(_i_) by _i_, _d_(2i) by _i_, …, _d_(10000 - 10000 % _i_) by _i_. After _d_ is taken care of, the rest is relatively straightforward, but note that if _d_[_a_] = _a_, then _a_ is not part of an amicable pair, because something cannot be paired with itself.
 
 [Source](./src/021.rb) | [Back to Index](#index)
+
+## Problem 22: Names scores
+
+> Using names.txt (right click and 'Save Link/Target As...'), a 46K text file containing over five-thousand first names, begin by sorting it into alphabetical order. Then working out the alphabetical value for each name, multiply this value by its alphabetical position in the list to obtain a name score.
+>
+> For example, when the list is sorted into alphabetical order, COLIN, which is worth 3 + 15 + 12 + 9 + 14 = 53, is the 938th name in the list. So, COLIN would obtain a score of 938 × 53 = 49714.
+>
+> What is the total of all the name scores in the file?
+
+There isn't much optimization I could think of, so there's not much to say. There are plenty of good sorting algorithms that we can find online, so there's no need to go over them; Ruby's built-in `sort` will do.
+
+Anyway, we can use `ord` in the score calculation. In doing so, we have a relatively fast character→integer mapping; however, a few things need to be dealt with first:
+- All the non-letter and non-delimiter characters need to be stripped out, which I dealt with using `gsub`.
+- While not necessary for the text file we are given, I call `upcase` on the file output just in case.
+- Since `ord` maps `A` to 65, `B` to 66, etc., instead of to 1 and 2 respectively, I effectively subtract 64 for each letter, but with a minor optimization so that I'm only subtracting once per name.
+
+Lastly, the data structure is an array, but since Ruby is 0-indexed, an empty string entry is needed so that the array index could be used as the rank operand in the multiplication step.
+
+[Source](./src/022.rb) | [Back to Index](#index)
 
 ## _More to come when time allows..._

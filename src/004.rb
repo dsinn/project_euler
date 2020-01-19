@@ -16,4 +16,4 @@ t0 = Time.now
     end
     x -= 1
 }
-puts (Time.now - t0).to_s + 'ms'
+puts (Time.now - t0).to_s + ' s'

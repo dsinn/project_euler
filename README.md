@@ -12,7 +12,7 @@ As much as I enjoyed using LaTeX in university, I'd rather just take advantage o
 |-|-|-|-|-|-|-|-|-|-|
 [1](#problem-1-multiples-of-3-and-5) | [2](#problem-2-even-fibonacci-numbers) | [3](#problem-3-largest-prime-factor) | [4](#problem-4-largest-palindrome-product) | [5](#problem-5-smallest-multiple) | [6](#problem-6-sum-square-difference) | [7](#problem-7-10001st-prime) | [8](#problem-8-largest-product-in-a-series) | [9](#problem-9-special-pythagorean-triplet) | [10](#problem-10-summation-of-primes)
 [11](#problem-11-largest-product-in-a-grid) | [12](#problem-12-highly-divisible-triangular-number) | [13](#problem-13-large-sum) | [14](#problem-14-longest-collatz-sequence) | [15](#problem-15-lattice-paths) | [16](#problem-16-power-digit-sum) | [17](#problem-17-number-letter-counts) | [18](#problem-18-maximum-path-sum-i) | [19](#problem-19-counting-sundays) | [20](#problem-20-factorial-digit-sum)
-[21](#problem-21-amicable-numbers) | [22](#problem-22-names-scores) | [23](#problem-23-non-abundant-sums)
+[21](#problem-21-amicable-numbers) | [22](#problem-22-names-scores) | [23](#problem-23-non-abundant-sums) | [24](#problem-24-lexicographic-permutations)
 
 ## Problem 1: Multiples of 3 and 5
 
@@ -444,5 +444,48 @@ This can be solved in a few steps:
 - Sum up the indices of the boolean array whose corresponding values are not the initial value.
 
 [Source](./src/023.rb) | [Back to Index](#index)
+
+## Problem 24: Lexicographic permutations
+
+> A permutation is an ordered arrangement of objects. For example, 3124 is one possible permutation of the digits 1, 2, 3 and 4. If all of the permutations are listed numerically or alphabetically, we call it lexicographic order. The lexicographic permutations of 0, 1 and 2 are:
+>
+> ```
+> 012   021   102   120   201   210
+> ```
+>
+> What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
+
+I've seen both brute-force solutions that slowly generate and sort every permutation in O(_n_!) time, as well as "pen and paper" solutions that suffice. While a recursive algorithm that generates permutations for any character set you through it is neat, it hurts performance so much and involves "so little math" that it was never on the table for me. While a "pen and paper" solution does the job as far as netting you points, I wouldn't have been satisfied with completing a Project Euler problem without writing any code, so my solution is actually a generalized "pen and paper" solution.
+
+Our iterative algorithm will be crafting the permutation from left to right by calculating each digit. Instead of using the answer to the problem as an example, we can use a much shorter example—the 3124 example they used in the description, which happens to be the 13th lexicographic permutation of 1, 2, 3 and 4. For the purpose of this explanation, let's just forget that we're using 3124, and pretend we're attempting to find the 13th permutation of 1, 2, 3 and 4.
+
+Before we can start building the answer, we need to store all the factorials up to _length_ - 1 factorial—in this example, 3!, so [1, 2, 6].  For the first digit, we know that the first permutations 1–6 start with "1", 7–12 start with "2", 13–18 start with "3", and 19–24 start with "4". It's not a coincidence that 6 is the largest factorial we computed; as the first digit is divided into four equally sized intervals, we use division to determine which interval it is in. We're looking for the 13th permutation, and since Ruby is 0-indexed, we actually need to start with 13 - 1 = 12 as the dividend because the quotient determines which character from the set we are selecting as the first digit. To illustrate this, consider the possible dividends when the divisor is 6:
+- If the dividend were in [0, 5], then the quotient would be 0, meaning we select the first character.
+- If the dividend were in [6, 11], then the quotient would be 1, meaning we select the second character.
+- If the dividend were in [12, 17], then the quotient would be 2, meaning we select the third character.
+- If the dividend were in [18, 23], then the quotient would be 3, meaning we select the fourth character.
+
+Hence, if we were calculating the 24th (last) lexicographical permutation of 1234 and didn't make the `-1` adjustment to the dividend, then 24 / 6 = 4, meaning we select the fifth character...out of a 4-character set.
+
+Going back to the 13th permutation, the quotient of 12 and 6 is 2, meaning "3" is the first digit. We are left with the digits [1, 2, 4] and a remainder of 0. As permutations 13–18 start with "3" (as explained in the previous paragraph), permutations 13–14 must therefore have "1" in the second digit, 15–16 must have "2" in the second digit, and 17–18 have "4". The quotient in successive iterations of the algorithm is just the next smaller factorial, which, again not a coincidence, is the size of the aforementioned intervals. The `-1` adjustment only happens at the beginning, which should be obvious at this point because subtracting 1 from our current remainder of 0 results in a negative number, which doesn't make sense. 0 / 2 = 0, which means the first character in the remaining character set, "1".
+
+So far we've built "31" and are left with the digits [2, 4] and a remainder of 0. Running another iteration of the algorithm, we have "312" and are left with the digit 4 and a remainder of 0. Once we are down the last digit, no more division is needed, and we can just tack on the remaining digit to the result and call it a day: 3124.
+
+To see the algorithm in action on the full problem, the factorials are [1, 3, 6, 24, 120, 720, 5040, 40320, 362880], so here's what a "pen and paper" solution may resemble:
+
+| Iteration | Equation              | Position | Remaining digits             | Digit |
+| --------: | --------------------: | -------: | :--------------------------- | :---: |
+|         1 | 999999 div 362880 = 2 |        3 | 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 |   2   |
+|         2 |  274239 div 40320 = 6 |        7 | 0, 1, 3, 4, 5, 6, 7, 8, 9    |   7   |
+|         3 |    32319 div 5040 = 6 |        7 | 0, 1, 3, 4, 5, 6, 8, 9       |   8   |
+|         4 |      2079 div 720 = 2 |        3 | 0, 1, 3, 4, 5, 6, 9          |   3   |
+|         5 |       639 div 120 = 5 |        6 | 0, 1, 4, 5, 6, 9             |   9   |
+|         6 |         39 div 24 = 1 |        2 | 0, 1, 4, 5, 6                |   1   |
+|         7 |          15 div 6 = 2 |        3 | 0, 4, 5, 6                   |   5   |
+|         8 |           3 div 3 = 1 |        2 | 0, 4, 6                      |   4   |
+|         9 |           1 div 1 = 1 |        2 | 0, 6                         |   6   |
+|         - |                     - |        1 | 0                            |   0   |
+
+[Source](./src/024.rb) | [Back to Index](#index)
 
 ## _More to come when time allows..._

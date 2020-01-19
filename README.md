@@ -12,7 +12,7 @@ As much as I enjoyed using LaTeX in university, I'd rather just take advantage o
 |-|-|-|-|-|-|-|-|-|-|
 [1](#problem-1-multiples-of-3-and-5) | [2](#problem-2-even-fibonacci-numbers) | [3](#problem-3-largest-prime-factor) | [4](#problem-4-largest-palindrome-product) | [5](#problem-5-smallest-multiple) | [6](#problem-6-sum-square-difference) | [7](#problem-7-10001st-prime) | [8](#problem-8-largest-product-in-a-series) | [9](#problem-9-special-pythagorean-triplet) | [10](#problem-10-summation-of-primes)
 [11](#problem-11-largest-product-in-a-grid) | [12](#problem-12-highly-divisible-triangular-number) | [13](#problem-13-large-sum) | [14](#problem-14-longest-collatz-sequence) | [15](#problem-15-lattice-paths) | [16](#problem-16-power-digit-sum) | [17](#problem-17-number-letter-counts) | [18](#problem-18-maximum-path-sum-i) | [19](#problem-19-counting-sundays) | [20](#problem-20-factorial-digit-sum)
-[21](#problem-21-amicable-numbers) | [22](#problem-22-names-scores)
+[21](#problem-21-amicable-numbers) | [22](#problem-22-names-scores) | [23](#problem-23-non-abundant-sums)
 
 ## Problem 1: Multiples of 3 and 5
 
@@ -425,5 +425,24 @@ Anyway, we can use `ord` in the score calculation. In doing so, we have a relati
 Lastly, the data structure is an array, but since Ruby is 0-indexed, an empty string entry is needed so that the array index could be used as the rank operand in the multiplication step.
 
 [Source](./src/022.rb) | [Back to Index](#index)
+
+## Problem 23: Non-abundant sums
+
+> A perfect number is a number for which the sum of its proper divisors is exactly equal to the number. For example, the sum of the proper divisors of 28 would be 1 + 2 + 4 + 7 + 14 = 28, which means that 28 is a perfect number.
+>
+> A number _n_ is called deficient if the sum of its proper divisors is less than _n_ and it is called abundant if this sum exceeds _n_.
+>
+> As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest number that can be written as the sum of two abundant numbers is 24. By mathematical analysis, it can be shown that all integers greater than 28123 can be written as the sum of two abundant numbers. However, this upper limit cannot be reduced any further by analysis even though it is known that the greatest number that cannot be expressed as the sum of two abundant numbers is less than this limit.
+>
+> Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
+
+This can be solved in a few steps:
+- Compute all the sums of divisors up to 28123 minus the smallest abundant number, using the same method used in [Problem 21](#problem-21-amicable-numbers).
+- Filter the abundant numbers from the result in the above step.
+- Initialize a boolean array up to index 28123.
+- For each pair of abundant numbers, set the array values at the sum to the non-initial value. Since the abundant numbers' data structure is in ascending order, we can stop the inner loop as soon as the sum exceeds 28123.
+- Sum up the indices of the boolean array whose corresponding values are not the initial value.
+
+[Source](./src/023.rb) | [Back to Index](#index)
 
 ## _More to come when time allows..._

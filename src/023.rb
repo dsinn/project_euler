@@ -1,32 +1,16 @@
-amicable_sum = Array.new(28124) { |i| 0 }
-last_index = amicable_sum.length - 1
-for i in 1 .. last_index
-    (i + i).step(last_index, i) { |j|
-        amicable_sum[j] += i
-    }
-end
+require_relative 'libs/sum_of_divisors.rb'
 
-abundants = Hash.new
-abundant_max = -1
-for i in 1 .. last_index
-    if i < amicable_sum[i]
-        abundants[i] = true
-        abundant_max = i
-    end
-end
+limit = 28123
 
-sum = 0
-for i in 1 .. abundant_max - 1
-    pair_exists = false
-    for j in 1 .. i >> 1
-        if abundants[j] and abundants[i - j]
-            pair_exists = true
-            break
-        end
-    end
+abundants = SumOfDivisors.generate(limit - 12).map.with_index { |sum, index| index if sum > index }.compact
 
-    if not pair_exists
-        sum += i
+pair_exists = Array.new(limit + 1) { |i| false }
+abundants.each_with_index { |value, i|
+    j = 0
+    while j <= i and (pair_sum = value + abundants[j]) <= limit
+        pair_exists[pair_sum] = true
+        j += 1
     end
-end
-puts sum
+}
+
+puts pair_exists.each_with_index.reduce(0) { |sum, (exists, value)| sum + (exists ? 0 : value) }

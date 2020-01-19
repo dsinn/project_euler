@@ -1,11 +1,7 @@
-limit = 10000
-d = Array.new(limit + 1) { |n| 1 }
+require_relative 'libs/sum_of_divisors.rb'
 
-for i in 2 .. limit.div(2)
-    (i + i).step(limit - 1, i) { |multiple|
-        d[multiple] += i
-    }
-end
+limit = 10000
+d = SumOfDivisors.generate(limit)
 
 counted = {}
 sum = 0

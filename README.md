@@ -12,7 +12,7 @@ As much as I enjoyed using LaTeX in university, I'd rather just take advantage o
 |-|-|-|-|-|-|-|-|-|-|
 [1](#problem-1-multiples-of-3-and-5) | [2](#problem-2-even-fibonacci-numbers) | [3](#problem-3-largest-prime-factor) | [4](#problem-4-largest-palindrome-product) | [5](#problem-5-smallest-multiple) | [6](#problem-6-sum-square-difference) | [7](#problem-7-10001st-prime) | [8](#problem-8-largest-product-in-a-series) | [9](#problem-9-special-pythagorean-triplet) | [10](#problem-10-summation-of-primes)
 [11](#problem-11-largest-product-in-a-grid) | [12](#problem-12-highly-divisible-triangular-number) | [13](#problem-13-large-sum) | [14](#problem-14-longest-collatz-sequence) | [15](#problem-15-lattice-paths) | [16](#problem-16-power-digit-sum) | [17](#problem-17-number-letter-counts) | [18](#problem-18-maximum-path-sum-i) | [19](#problem-19-counting-sundays) | [20](#problem-20-factorial-digit-sum)
-[21](#problem-21-amicable-numbers) | [22](#problem-22-names-scores) | [23](#problem-23-non-abundant-sums) | [24](#problem-24-lexicographic-permutations) | [25](#problem-25-1000-digit-fibonacci-number) | [26](#problem-26-reciprocal-cycles)
+[21](#problem-21-amicable-numbers) | [22](#problem-22-names-scores) | [23](#problem-23-non-abundant-sums) | [24](#problem-24-lexicographic-permutations) | [25](#problem-25-1000-digit-fibonacci-number) | [26](#problem-26-reciprocal-cycles) | [27](#problem-27-quadratic-primes)
 
 ## Problem 1: Multiples of 3 and 5
 
@@ -533,5 +533,32 @@ In order to calculate the period of a decimal representation, we just do [long d
 Note that my solution only checks prime numbers because I believe that the period for any number cannot be less than that of any of its multiples. However, I'm super rusty in group theory, so I don't think I will be proving it any time soon without help.
 
 [Source](./src/026.rb) | [Back to Index](#index)
+
+## Problem 27: Quadratic primes
+
+> Euler discovered the remarkable quadratic formula:
+>
+> _n_<sup>2</sup> + _n_ + 41
+>
+> It turns out that the formula will produce 40 primes for the consecutive integer values 0 ≤ _n_ ≤ 39. However, when _n_ = 40, 402 + 40 + 41 = 40(40 + 1) + 41 is divisible by 41, and certainly when _n_ = 41, 412 + 41 + 41 is clearly divisible by 41.
+>
+> The incredible formula n<sup>2</sup> − 79 _n_ + 1601 was discovered, which produces 80 primes for the consecutive values 0 ≤ _n_ ≤ 79. The product of the coefficients, −79 and 1601, is −126479.
+>
+> Considering quadratics of the form:
+>
+> _n_<sup>2</sup> + _an_ + _b_, where |_a_| < 1000 and |_b_| ≤ 1000
+>
+> where |_n_| is the modulus/absolute value of _n_
+> e.g. |11| = 11 and |−4| = 4
+>
+> Find the product of the coefficients, _a_ and _b_, for the quadratic expression that produces the maximum number of primes for consecutive values of _n_, starting with _n_ = 0.
+
+My solution is mostly brute force, but with the following optimizations:
+- Since the polynomial needs to evaluate to a prime for _n_ = 0, only check for prime values of _b_. A sieve can be used to find prime numbers up to 1000.
+- Since the polynomial needs to evaluate to a prime for _n_ = 1, only check for odd values of _a_, and for _a_ > -_b_.
+- Since we check for primality many times, use a sieve beforehand so that the checks are done in constant time after the sieve is used. I arbitrarily set the upper bound of the sieve to the value of the polynomial at _n_ = 1000, _a_ = 1000 and _b_ = 1000, which happens to be overkill but I'm not sure how to reduce that further.
+- Micro-optimization: reduce the polynomial _n_<sup>2</sup> + _an_ + _b_ to _n_(_n_ + _a_) + _b_, removing one multiplication operation.
+
+[Source](./src/027.rb) | [Back to Index](#index)
 
 ## _More to come when time allows..._

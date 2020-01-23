@@ -8,7 +8,7 @@ primes.each do |d|
     h = Hash.new
     place = 0
     numerator = 1
-    while numerator > 0
+    loop do
         numerator *= 10
         if h.has_key?(numerator)
             len = place - h[numerator]

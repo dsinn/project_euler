@@ -12,7 +12,7 @@ As much as I enjoyed using LaTeX in university, I'd rather just take advantage o
 |-|-|-|-|-|-|-|-|-|-|
 [1](#problem-1-multiples-of-3-and-5) | [2](#problem-2-even-fibonacci-numbers) | [3](#problem-3-largest-prime-factor) | [4](#problem-4-largest-palindrome-product) | [5](#problem-5-smallest-multiple) | [6](#problem-6-sum-square-difference) | [7](#problem-7-10001st-prime) | [8](#problem-8-largest-product-in-a-series) | [9](#problem-9-special-pythagorean-triplet) | [10](#problem-10-summation-of-primes)
 [11](#problem-11-largest-product-in-a-grid) | [12](#problem-12-highly-divisible-triangular-number) | [13](#problem-13-large-sum) | [14](#problem-14-longest-collatz-sequence) | [15](#problem-15-lattice-paths) | [16](#problem-16-power-digit-sum) | [17](#problem-17-number-letter-counts) | [18](#problem-18-maximum-path-sum-i) | [19](#problem-19-counting-sundays) | [20](#problem-20-factorial-digit-sum)
-[21](#problem-21-amicable-numbers) | [22](#problem-22-names-scores) | [23](#problem-23-non-abundant-sums) | [24](#problem-24-lexicographic-permutations) | [25](#problem-25-1000-digit-fibonacci-number)
+[21](#problem-21-amicable-numbers) | [22](#problem-22-names-scores) | [23](#problem-23-non-abundant-sums) | [24](#problem-24-lexicographic-permutations) | [25](#problem-25-1000-digit-fibonacci-number) | [26](#problem-26-reciprocal-cycles)
 
 ## Problem 1: Multiples of 3 and 5
 
@@ -509,5 +509,29 @@ Note that this is slightly modified from the linked page's equation—the `floor
 Ruby's default floats and math library do not play that nicely with operations on large numbers, so we have to work around them a bit. We also make use of the [logarithm change of base](https://en.wikipedia.org/wiki/Logarithm#Change_of_base) formula as Ruby's BigMath library only takes integer bases, and the [distributive property of exponents](https://en.wikipedia.org/wiki/Exponentiation#Identities_and_properties) for a micro-optimization in calculating the [golden ratio](https://en.wikipedia.org/wiki/Golden_ratio) φ.
 
 [Source](./src/025.rb) | [Back to Index](#index)
+
+## Problem 26: Reciprocal cycles
+
+> A unit fraction contains 1 in the numerator. The decimal representation of the unit fractions with denominators 2 to 10 are given:
+>
+> <sup>1</sup>/<sub>2</sub>	= 0.5\
+> <sup>1</sup>/<sub>3</sub>	= 0.(3)\
+> <sup>1</sup>/<sub>4</sub>	= 0.25\
+> <sup>1</sup>/<sub>5</sub>	= 0.2\
+> <sup>1</sup>/<sub>6</sub>	= 0.1(6)\
+> <sup>1</sup>/<sub>7</sub>	= 0.(142857)\
+> <sup>1</sup>/<sub>8</sub>	= 0.125\
+> <sup>1</sup>/<sub>9</sub>	= 0.(1)\
+> <sup>1</sup>/<sub>10</sub> = 0.1
+>
+> Where 0.1(6) means 0.166666..., and has a 1-digit recurring cycle. It can be seen that <sup>1</sup>/<sub>7</sub> has a 6-digit recurring cycle.
+>
+> Find the value of _d_ < 1000 for which <sup>1</sup>/<sub>_d_,</sub> contains the longest recurring cycle in its decimal fraction part.
+
+In order to calculate the period of a decimal representation, we just do [long division](https://en.wikipedia.org/wiki/Long_division) until the numerator was previously seen. The hash stores the position at which a numerator was first seen, so that in the case of a repeat, we just subtract the current position from the hash's value to obtain the period.
+
+Note that my solution only checks prime numbers because I believe that the period for any number cannot be less than that of any of its multiples. However, I'm super rusty in group theory, so I don't think I will be proving it any time soon without help.
+
+[Source](./src/026.rb) | [Back to Index](#index)
 
 ## _More to come when time allows..._

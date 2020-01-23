@@ -12,7 +12,7 @@ As much as I enjoyed using LaTeX in university, I'd rather just take advantage o
 |-|-|-|-|-|-|-|-|-|-|
 [1](#problem-1-multiples-of-3-and-5) | [2](#problem-2-even-fibonacci-numbers) | [3](#problem-3-largest-prime-factor) | [4](#problem-4-largest-palindrome-product) | [5](#problem-5-smallest-multiple) | [6](#problem-6-sum-square-difference) | [7](#problem-7-10001st-prime) | [8](#problem-8-largest-product-in-a-series) | [9](#problem-9-special-pythagorean-triplet) | [10](#problem-10-summation-of-primes)
 [11](#problem-11-largest-product-in-a-grid) | [12](#problem-12-highly-divisible-triangular-number) | [13](#problem-13-large-sum) | [14](#problem-14-longest-collatz-sequence) | [15](#problem-15-lattice-paths) | [16](#problem-16-power-digit-sum) | [17](#problem-17-number-letter-counts) | [18](#problem-18-maximum-path-sum-i) | [19](#problem-19-counting-sundays) | [20](#problem-20-factorial-digit-sum)
-[21](#problem-21-amicable-numbers) | [22](#problem-22-names-scores) | [23](#problem-23-non-abundant-sums) | [24](#problem-24-lexicographic-permutations)
+[21](#problem-21-amicable-numbers) | [22](#problem-22-names-scores) | [23](#problem-23-non-abundant-sums) | [24](#problem-24-lexicographic-permutations) | [25](#problem-25-1000-digit-fibonacci-number)
 
 ## Problem 1: Multiples of 3 and 5
 
@@ -455,7 +455,7 @@ This can be solved in a few steps:
 >
 > What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 
-I've seen both brute-force solutions that slowly generate and sort every permutation in O(_n_!) time, as well as "pen and paper" solutions that suffice. While a recursive algorithm that generates permutations for any character set you through it is neat, it hurts performance so much and involves "so little math" that it was never on the table for me. While a "pen and paper" solution does the job as far as netting you points, I wouldn't have been satisfied with completing a Project Euler problem without writing any code, so my solution is actually a generalized "pen and paper" solution.
+I've seen both brute-force solutions that slowly generate and sort every permutation in _O_(_n_!) time, as well as "pen and paper" solutions that suffice. While a recursive algorithm that generates permutations for any character set you through it is neat, it hurts performance so much and involves "so little math" that it was never on the table for me. While a "pen and paper" solution does the job as far as netting you points, I wouldn't have been satisfied with completing a Project Euler problem without writing any code, so my solution is actually a generalized "pen and paper" solution.
 
 Our iterative algorithm will be crafting the permutation from left to right by calculating each digit. Instead of using the answer to the problem as an example, we can use a much shorter example—the 3124 example they used in the description, which happens to be the 13th lexicographic permutation of 1, 2, 3 and 4. For the purpose of this explanation, let's just forget that we're using 3124, and pretend we're attempting to find the 13th permutation of 1, 2, 3 and 4.
 
@@ -487,5 +487,27 @@ To see the algorithm in action on the full problem, the factorials are [1, 3, 6,
 |         - |                     - |        1 | 0                            |   0   |
 
 [Source](./src/024.rb) | [Back to Index](#index)
+
+## Problem 25: 1000-digit Fibonacci number
+
+> The Fibonacci sequence is defined by the recurrence relation:
+>
+> _F_<sub>_n_</sub> = _F_<sub>_n_−1</sub> + _F_<sub>n</sub>−2, where _F_<sub>1</sub> = 1 and _F_<sub>2</sub> = 1.
+>
+> Hence the first 12 terms will be: [_redacted_]
+>
+> The 12th term, F<sub>12</sub>, is the first term to contain three digits.
+>
+> What is the index of the first term in the Fibonacci sequence to contain 1000 digits?
+
+Seeing as the Fibonacci sequence is a [constant-recursive sequence](https://en.wikipedia.org/wiki/Constant-recursive_sequence), there is a formula for calculating the nth term in the sequence, known as [Binet's formula](https://en.wikipedia.org/wiki/Fibonacci_number#Binet's_formula), and it can be written in terms of _F_<sub>_n_</sub>:
+
+> _n_(_F_) = ⌈log<sub>φ</sub>(_F_ · √5 + ½)⌉.
+
+Note that this is slightly modified from the linked page's equation—the `floor` being changed to a `ceil`—because we want the smallest index that exceeds a given value, instead of the largest index that does not exceed a given value.
+
+Ruby's default floats and math library do not play that nicely with operations on large numbers, so we have to work around them a bit. We also make use of the [logarithm change of base](https://en.wikipedia.org/wiki/Logarithm#Change_of_base) formula as Ruby's BigMath library only takes integer bases, and the [distributive property of exponents](https://en.wikipedia.org/wiki/Exponentiation#Identities_and_properties) for a micro-optimization in calculating the [golden ratio](https://en.wikipedia.org/wiki/Golden_ratio) φ.
+
+[Source](./src/025.rb) | [Back to Index](#index)
 
 ## _More to come when time allows..._

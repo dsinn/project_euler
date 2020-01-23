@@ -1,10 +1,8 @@
-term = 2
-a = 1
-b = 1
+require 'bigdecimal'
+require 'bigdecimal/math'
 
-limit = 10 ** 999
-while b < limit
-    a, b = b, a + b
-    term += 1
+def getFibonacciIndex(f_n)
+    (BigMath.log(BigDecimal(f_n) * Math.sqrt(5) + 0.5, 10) / Math.log(0.5 + Math.sqrt(1.25))).ceil
 end
-puts term
+
+puts getFibonacciIndex(10 ** 999)

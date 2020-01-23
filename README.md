@@ -12,7 +12,7 @@ As much as I enjoyed using LaTeX in university, I'd rather just take advantage o
 |-|-|-|-|-|-|-|-|-|-|
 [1](#problem-1-multiples-of-3-and-5) | [2](#problem-2-even-fibonacci-numbers) | [3](#problem-3-largest-prime-factor) | [4](#problem-4-largest-palindrome-product) | [5](#problem-5-smallest-multiple) | [6](#problem-6-sum-square-difference) | [7](#problem-7-10001st-prime) | [8](#problem-8-largest-product-in-a-series) | [9](#problem-9-special-pythagorean-triplet) | [10](#problem-10-summation-of-primes)
 [11](#problem-11-largest-product-in-a-grid) | [12](#problem-12-highly-divisible-triangular-number) | [13](#problem-13-large-sum) | [14](#problem-14-longest-collatz-sequence) | [15](#problem-15-lattice-paths) | [16](#problem-16-power-digit-sum) | [17](#problem-17-number-letter-counts) | [18](#problem-18-maximum-path-sum-i) | [19](#problem-19-counting-sundays) | [20](#problem-20-factorial-digit-sum)
-[21](#problem-21-amicable-numbers) | [22](#problem-22-names-scores) | [23](#problem-23-non-abundant-sums) | [24](#problem-24-lexicographic-permutations) | [25](#problem-25-1000-digit-fibonacci-number) | [26](#problem-26-reciprocal-cycles) | [27](#problem-27-quadratic-primes)
+[21](#problem-21-amicable-numbers) | [22](#problem-22-names-scores) | [23](#problem-23-non-abundant-sums) | [24](#problem-24-lexicographic-permutations) | [25](#problem-25-1000-digit-fibonacci-number) | [26](#problem-26-reciprocal-cycles) | [27](#problem-27-quadratic-primes) | [28](#problem-28-number-spiral-diagonals)
 
 ## Problem 1: Multiples of 3 and 5
 
@@ -560,5 +560,47 @@ My solution is mostly brute force, but with the following optimizations:
 - Micro-optimization: reduce the polynomial _n_<sup>2</sup> + _an_ + _b_ to _n_(_n_ + _a_) + _b_, removing one multiplication operation.
 
 [Source](./src/027.rb) | [Back to Index](#index)
+
+## Problem 28: Number spiral diagonals
+
+> Starting with the number 1 and moving to the right in a clockwise direction a 5 by 5 spiral is formed as follows:
+>
+> ```
+> 21 22 23 24 25
+> 20  7  8  9 10
+> 19  6  1  2 11
+> 18  5  4  3 12
+> 17 16 15 14 13
+> ```
+>
+> It can be verified that the sum of the numbers on the diagonals is 101.
+>
+> What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
+
+If we divide the spiral into sections, we can observe that each sequence is polynomial.
+
+1. From the top-left to bottom-right, we have: 1, 3, 7, 13, 21, …, which is quadratic because the first differences (2, 4, 6, 8, …) are linear.
+2. From the centre to the top-right, we have: 1<sup>2</sup>, 2<sup>2</sup>, 3<sup>2</sup>, …, which is obviously quadratic.
+3. From the centre to the bottom-left, we have: 0² + 1, 2² + 1, 4² + 1, …, which is quadratic.
+
+The sum of a polynomial sequence is another polynomial with one more order, so we know that the answer is the value of a cubic equation. A variety of techniques can be used to determine the polynomial coefficients for each section, but I used [Lagrange interpolation](https://en.wikipedia.org/wiki/Lagrange_polynomial), which has several implementations online but requires at least four inputs to yield a cubic formula, so I had to expand the spiral a bit. The sums can thus be calculated as:
+
+1. _x_<sup>3</sup>/3 + 2 _x_/3
+2. 4 _x_<sup>3</sup>/3 - _x_/3
+3. 4 _x_<sup>3</sup>/3 - 2 _x_<sup>2</sup> + 5 _x_/3
+
+Before we can sum these together, we need to address the fact that polynomial #1 accounts for roughly half of the diagonal terms, whereas each of the other two are roughly a quarter. One way would have been to split everything up uniformly—instead of three polynomials, have four polynomials that each account for one quadrant of the spiral. However, we could just use some algebra; the width _w_ of the spiral is always odd, so we can substitute in _x_ = _w_ for polynomial #1 and _x_ = (_w_ + 1) / 2 for the other two:
+
+1. (_w_<sup>3</sup> + 2 _w_) / 3
+2. (_w_<sup>3</sup> + 3 _w_<sup>2</sup> + 2 _w_) / 6
+3. (_w_<sup>3</sup> + 2 _w_ + 3) / 6
+
+After summing the result, collecting the like terms, and then subtracting two to adjust for the triple-counting of the 1 in the middle, we end up with:
+
+(4 _w_<sup>3</sup> + 3 _w_<sup>2</sup> + 8 _w_ - 9) / 6
+
+Micro-optimization: reduce the amount of multiplication/exponentiation operations by using the [distributive property](https://en.wikipedia.org/wiki/Distributive_property).
+
+[Source](./src/028.rb) | [Back to Index](#index)
 
 ## _More to come when time allows..._

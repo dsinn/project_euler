@@ -1,4 +1,8 @@
-def f(n)
-    (16 * n**3 - 18 * n*n + 14 * n - 9) / 3
+def f(x)
+    if x % 2 == 0
+        raise 'The spiral cannot have an even width.'
+    end
+
+    puts (((4 * x + 3) * x + 8) * x - 9) / 6
 end
-puts f((1001 + 1) / 2)
+puts f(1001)

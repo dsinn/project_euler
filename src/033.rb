@@ -21,5 +21,5 @@ denom_product = 1
   end
 end
 
-puts denom_product / gcd(numer_product, denom_product).value
+puts denom_product / gcd(numer_product, denom_product)
 puts "#{Time.now - t0} s"

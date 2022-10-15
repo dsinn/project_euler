@@ -1,5 +1,3 @@
-require 'ostruct'
-
 $is_prime = {}
 $is_prime[1] = false
 $is_prime[2] = true
@@ -56,24 +54,15 @@ def gcd(a, b)
   # Euclidean algorithm
   a, b = b, a if a < b
 
-  r = [OpenStruct.new(value: a, x: 1, y: 0),
-       OpenStruct.new(value: b, x: 0, y: 1)]
-  i = 1
-  while r[i].value > 0
-    i += 1
-    q = r[i - 2].value / r[i - 1].value
-    r[i] = OpenStruct.new(
-      value: r[i - 2].value % r[i - 1].value,
-      x: r[i - 2].x - q * r[i - 1].x,
-      y: r[i - 2].y - q * r[i - 1].y
-    )
+  until b.zero?
+    a, b = b, a % b
   end
 
-  r[i - 1]
+  a
 end
 
 def lcm(a, b)
-  a * b / gcd(a, b).value
+  a * b / gcd(a, b)
 end
 
 def exp10(n)

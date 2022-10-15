@@ -8,7 +8,7 @@ half_limit = limit >> 1
 count = Array.new(half_limit + 1) { 0 } # Perimeter is always even, so save some memory
 (1..(-0.5 + Math.sqrt(0.25 + half_limit)).to_i).each do |m| # Solve 2m^2 + 2m = limit
   ((m & 1) + 1).step(m - 1, 2) do |n| # Each number in [1 .. m-1] with different parity
-    if gcd(m, n).value == 1 # m and n must be coprime
+    if gcd(m, n) == 1 # m and n must be coprime
       half_perimeter = m * (m + n) # Collect like terms in a + b + c and then simplify
       half_perimeter.step(half_limit, half_perimeter) do |hp|
         count[hp] += 1

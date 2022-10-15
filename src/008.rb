@@ -26,26 +26,22 @@ groups = s.gsub(/\D/, '').split(/0+/)
 max_product = 0
 
 groups.each do |group|
-    if group.length >= adjacent_digits
-        v = []
-        for i in 0 .. group.length - 1
-            v << group[i].to_i
-        end
+  next unless group.length >= adjacent_digits
 
-        product = 1
-        for i in 0 .. adjacent_digits - 1
-            product *= v[i]
-        end
-        if max_product < product
-            max_product = product
-        end
+  v = []
+  (0..group.length - 1).each do |i|
+    v << group[i].to_i
+  end
 
-        for i in adjacent_digits .. v.length - 1
-            product = product / v[i - adjacent_digits] * v[i]
-            if max_product < product
-                max_product = product
-            end
-        end
-    end
+  product = 1
+  (0..adjacent_digits - 1).each do |i|
+    product *= v[i]
+  end
+  max_product = product if max_product < product
+
+  (adjacent_digits..v.length - 1).each do |i|
+    product = product / v[i - adjacent_digits] * v[i]
+    max_product = product if max_product < product
+  end
 end
 puts max_product

@@ -102,6 +102,6 @@ lines = s.split(/\r?\n/)
 
 total = 0
 lines.each do |line|
-    total += line.to_i
+  total += line.to_i
 end
 puts total.to_s[0, 10]

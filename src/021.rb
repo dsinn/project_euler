@@ -1,18 +1,18 @@
-require_relative 'libs/sum_of_divisors.rb'
+require_relative 'libs/sum_of_divisors'
 
-limit = 10000
+limit = 10_000
 d = SumOfDivisors.generate(limit)
 
 counted = {}
 sum = 0
-for a in 1 .. limit
-    if not counted.key?(a)
-        b = d[a]
-        if d[b] == a and a != b
-            puts a.to_s + ' ' + b.to_s
-            sum += a + b
-            counted[b] = true
-        end
-    end
+(1..limit).each do |a|
+  next if counted.key?(a)
+
+  b = d[a]
+  next unless (d[b] == a) && (a != b)
+
+  puts "#{a} #{b}"
+  sum += a + b
+  counted[b] = true
 end
 puts sum

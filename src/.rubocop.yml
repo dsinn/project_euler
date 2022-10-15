@@ -1,0 +1,7 @@
+# RuboCop v1.36.0
+
+Naming/MethodParameterName:
+  Enabled: false # Don't need to deviate from math nomenclature
+
+Naming/MethodName:
+  Enabled: false # Don't need to spell out math variables

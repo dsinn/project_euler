@@ -1,26 +1,24 @@
-x = 600851475143
+x = 600_851_475_143
 factors = []
 
 # Check if even
-while (x & 1 == 0)
-    x /= 2
-    factors << 2
+while (x & 1).zero?
+  x /= 2
+  factors << 2
 end
 
 operand = 3
 sqrt_x = Math.sqrt(x).floor
 
-while (x > 1 && operand < sqrt_x)
-    while (x % operand == 0)
-        factors << operand
-        x /= operand
-        sqrt_x = Math.sqrt(x).floor
-    end
-    operand += 2
+while x > 1 && operand < sqrt_x
+  while (x % operand).zero?
+    factors << operand
+    x /= operand
+    sqrt_x = Math.sqrt(x).floor
+  end
+  operand += 2
 end
 
-if x > 1
-    factors << x
-end
+factors << x if x > 1
 
 puts factors

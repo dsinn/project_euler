@@ -1,3 +1,3 @@
-require_relative 'combinatorics.rb'
+require_relative 'combinatorics'
 
 puts Combinatorics.nCr(40, 20)

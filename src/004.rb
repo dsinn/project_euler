@@ -1,19 +1,18 @@
 def is_divisible_by_triple_digits(x)
-    999.step(Math.sqrt(x).floor, -1 - (x & 1)) { |i|
-        if x % i == 0
-            puts i.to_s + ' x ' + (x / i).to_s + ' = ' + x.to_s
-            return true
-        end
-    }
-    false
+  999.step(Math.sqrt(x).floor, -1 - (x & 1)) do |i|
+    if (x % i).zero?
+      puts "#{i} x #{x / i} = #{x}"
+      return true
+    end
+  end
+  false
 end
 
 t0 = Time.now
-997.downto(100) { |x|
-    y = (x.to_s + x.to_s.reverse).to_i
-    if is_divisible_by_triple_digits(y)
-        break
-    end
-    x -= 1
-}
-puts (Time.now - t0).to_s + ' s'
+997.downto(100) do |x|
+  y = (x.to_s + x.to_s.reverse).to_i
+  break if is_divisible_by_triple_digits(y)
+
+  x -= 1
+end
+puts "#{Time.now - t0} s"

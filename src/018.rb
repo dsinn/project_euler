@@ -1,19 +1,19 @@
 def max_triangle_path_sum(triangle)
-    prev_maxes = Array.new(triangle.length)
-    maxes = Array.new(triangle.length)
-    maxes[0] = triangle[0][0]
+  prev_maxes = Array.new(triangle.length)
+  maxes = Array.new(triangle.length)
+  maxes[0] = triangle[0][0]
 
-    for i in 1 .. triangle.length - 1
-        prev_maxes, maxes = maxes, prev_maxes
-        row = triangle[i]
-        maxes[0] = prev_maxes[0] + row[0]
-        maxes[i] = prev_maxes[i - 1] + row[i]
+  (1..triangle.length - 1).each do |i|
+    prev_maxes, maxes = maxes, prev_maxes
+    row = triangle[i]
+    maxes[0] = prev_maxes[0] + row[0]
+    maxes[i] = prev_maxes[i - 1] + row[i]
 
-        for j in 1 .. i - 1
-            maxes[j] = row[j] + [prev_maxes[j], prev_maxes[j - 1]].max
-        end
+    (1..i - 1).each do |j|
+      maxes[j] = row[j] + [prev_maxes[j], prev_maxes[j - 1]].max
     end
-    maxes.max
+  end
+  maxes.max
 end
 
 s = '75
@@ -33,7 +33,7 @@ s = '75
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23'
 
 rows = s.split(/\r?\n/)
-triangle = Array.new(rows.length) { |i|
-    rows[i].split(' ').collect { |x| x.to_i }
-}
+triangle = Array.new(rows.length) do |i|
+  rows[i].split(' ').collect(&:to_i)
+end
 puts max_triangle_path_sum(triangle)

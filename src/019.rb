@@ -7,8 +7,8 @@ remainderYears = (endingYear - startingYear) % 28
 
 totalCount = 0
 countsByStartingDay = [
-    {},
-    {}
+  {},
+  {}
 ]
 
 startingDay = 365 # Skip to January 1, 1901
@@ -16,41 +16,37 @@ day = startingDay
 year = startingYear
 
 while year <= endingYear
-    leapYearFlag = (year % 4 == 0 and (year % 100 > 0 or year % 400 == 0)) ? 1 : 0
-    firstDayOfYear = day % 7
+  leapYearFlag = (year % 4).zero? && ((year % 100 > 0) || (year % 400).zero?) ? 1 : 0
+  firstDayOfYear = day % 7
 
-    if countsByStartingDay[leapYearFlag].key?(firstDayOfYear)
-        totalCount += countsByStartingDay[leapYearFlag][firstDayOfYear]
-        day += 365 + leapYearFlag
-    else
-        yearCount = 0
-        for month in 1 .. 12
-            if day % 7 == 6 # 0 is a Monday, therefore 6 is a Sunday
-                yearCount += 1
-            end
+  if countsByStartingDay[leapYearFlag].key?(firstDayOfYear)
+    totalCount += countsByStartingDay[leapYearFlag][firstDayOfYear]
+    day += 365 + leapYearFlag
+  else
+    yearCount = 0
+    (1..12).each do |month|
+      yearCount += 1 if day % 7 == 6 # 0 is a Monday, therefore 6 is a Sunday
 
-            day += days_in_month[month]
-            if month == 2 and leapYearFlag > 0
-                day += 1
-            end
-        end
-
-        countsByStartingDay[leapYearFlag][firstDayOfYear] = yearCount
-        totalCount += yearCount
+      day += days_in_month[month]
+      day += 1 if (month == 2) && (leapYearFlag > 0)
     end
 
-    year += 1
+    countsByStartingDay[leapYearFlag][firstDayOfYear] = yearCount
+    totalCount += yearCount
+  end
 
-    case year - startingYear
-    when remainderYears
-        remainderCount = totalCount
-    when 28
-        periodsToSkip = (endingYear - year).div(28)
-        totalCount *= periodsToSkip + 1
+  year += 1
 
-        totalCount += remainderCount
-        year += 28 * periodsToSkip + remainderYears
-    end
+  case year - startingYear
+  when remainderYears
+    remainderCount = totalCount
+  when 28
+    periodsToSkip = (endingYear - year).div(28)
+    totalCount *= periodsToSkip + 1
+
+    totalCount += remainderCount
+    year += 28 * periodsToSkip + remainderYears
+  end
 end
 
 puts totalCount

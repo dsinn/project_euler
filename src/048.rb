@@ -1,19 +1,19 @@
-require_relative 'projecteuler.rb'
+require_relative 'projecteuler'
 t0 = Time.now
 limit = 1000
-mod = 10 ** 10
+mod = 10**10
 total = 0
-for i in 1 .. limit
-    total = (total + mod_exp(i, i, mod)) % mod
+(1..limit).each do |i|
+  total = (total + mod_exp(i, i, mod)) % mod
 end
 puts total
 
 t1 = Time.now
 total = 0
-for i in 1 .. limit
-    total += i ** i
+(1..limit).each do |i|
+  total += i**i
 end
 puts total % mod
 
-puts (t1 - t0).to_s + ' s'
-puts (Time.now - t1).to_s + ' s'
+puts "#{t1 - t0} s"
+puts "#{Time.now - t1} s"

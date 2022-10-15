@@ -14,7 +14,7 @@ def english(n)
     hundreds = n / 100
     remainder = n % 100
     "#{$words_ones[hundreds]} hundred#{remainder > 0 ? " and #{english(remainder)}" : ''}"
-  elsif n = 1000
+  elsif n == 1000
     "#{english(1)} thousand"
   else
     raise 'Numbers above one thousand not implemented'

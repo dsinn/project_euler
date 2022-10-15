@@ -11,7 +11,7 @@ buckets = Array.new(key_length) { [] }
 def valid?(x)
   # /[A-Za-z0-9 !,;\.\(\)]/
   # <%20>    <!    >    <'()            >    <,    >    <.    >    <0-9            >    <;    >    <A-Z            >    <a-z             >
-  x == 32 or x == 33 or x > 38 and x < 42 or x == 44 or x == 46 or x > 47 and x < 58 or x == 59 or x > 64 and x < 91 or x > 96 and x < 123
+  [32, 33, 44, 46, 59].include?(x) || [(39..41), (48..57), (65..90), (97..122)].any? { |range| range.include?(x) }
 end
 
 buckets.each_with_index do |bucket, i|

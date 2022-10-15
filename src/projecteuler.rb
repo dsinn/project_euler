@@ -73,8 +73,9 @@ def exp10(n)
   product
 end
 
+# rubocop:disable all
 def sieve_atkin(limit)
-  is_prime = Array.new(limit + 1) { |_i| false }
+  is_prime = Array.new(limit + 1) { false }
   sqrt = Math.sqrt(limit).to_i
   (1..sqrt).each do |i|
     i2 = i * i
@@ -105,6 +106,7 @@ def sieve_atkin(limit)
   is_prime[3] = true
   is_prime
 end
+# rubocop:enable all
 
 def get_primes(limit)
   is_prime = sieve_atkin(limit)

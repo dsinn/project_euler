@@ -1,5 +1,8 @@
 # RuboCop v1.36.0
 
+Metrics/MethodLength:
+  Max: 20
+
 Naming/MethodParameterName:
   Enabled: false # Don't need to deviate from math nomenclature
 

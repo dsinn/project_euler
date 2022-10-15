@@ -34,11 +34,16 @@ My goal was to compute this in constant time, which can be done by adding the [a
 
 First off, don't use recursion, as it would kill the performance. My goal was to avoid wasting any iterations, _i.e.,_ avoid `if` statements, ternary operators, etc.
 
-Because of the properties of addition with odd and even numbers, every third Fibonacci number is even, so we'd have to keep calculating x<sub>i+3</sub> instead of x<sub>i+1</sub>. If we initialize x<sub>0</sub> = 1 and x<sub>1</sub> = 2, then we'd have to expand x<sub>i+3</sub> = x<sub>i+2</sub> + x<sub>i+1</sub> = ... until we're left with just x<sub>i</sub>, x<sub>i-1</sub> and their coefficients. Collect the like terms, and you're left with:
-- x<sub>i+2</sub> = x<sub>i-1</sub> + 2x<sub>i</sub>
-- x<sub>i+3</sub> = 2x<sub>i-1</sub> + 3x<sub>i</sub>
+Because of the properties of addition with odd and even numbers, every third Fibonacci number is even, so we'd have to keep calculating $x_{i+3}$ instead of $x_{i+1}$. If we initialize $x_0 = 1$ and $x_1 = 2$, then we'd have to expand $x_{i+3} = x_{i+2} + x_{i+1} = \ldots$ until we're left with just $x_i$, $x_{i-1}$ and their coefficients. Collect the like terms, and you're left with:
 
-It's good to store x<sub>i+2</sub> in a variable for the next iteration.
+$$
+\begin{aligned}
+x_{i+2} &= x_{i-1} + 2x_i \\
+x_{i+3} &= 2x_{i-1} + 3x_i
+\end{aligned}
+$$
+
+It's good to store $x_{i+2}$ in a variable for the next iteration.
 
 [Source](./src/002.rb) | [Back to Index](#index)
 
@@ -48,17 +53,17 @@ It's good to store x<sub>i+2</sub> in a variable for the next iteration.
 >
 > What is the largest prime factor of the number 600851475143?
 
-My solution was generalized for any number _x,_ and for fun, I stored the entire list of prime factors. In order to optimize memory, you'd just store the last factor found into a scalar variable.
+My solution was generalized for any number $x$ and for fun, I stored the entire list of prime factors. In order to optimize memory, you'd just store the last factor found into a scalar variable.
 
-The general idea is to start with the smallest prime number, divide _x_ as much as possible, and then move onto the next smallest prime number until we're done with the prime factorization, _i.e.,_ we've divided _x_ until we're left with 1.
+The general idea is to start with the smallest prime number, divide $x$ as much as possible, and then move onto the next smallest prime number until we're done with the prime factorization, _i.e.,_ we've divided $x$ until we're left with 1.
 
 Since 2 is the only even prime number, it gets a special block at the front; the rest of the prime numbers can be found by starting at 3 and incrementing by 2, as they are all odd.
 
-Some odd numbers are a composite number _c,_ but that is okay because we already divided by _c_'s prime factors earlier in the loop since we go through the numbers in ascending order.
+Some odd numbers are a composite number $c$, but that is okay because we already divided by $c$'s prime factors earlier in the loop since we go through the numbers in ascending order.
 
 Once the operand is past the square root, we know that the only multiples are 1 and the number itself.
 
-An alternative approach would be to generate all the prime numbers up until the square root of _x,_ perhaps using something like the [sieve of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin), but for fun problems like this, I find it less fun to use someone else's algorithm when I'm not smart enough to derive it myself. Some other sieves are simpler, but they are still relatively verbose, I feel.
+An alternative approach would be to generate all the prime numbers up until the square root of $x$, perhaps using something like the [sieve of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin), but for fun problems like this, I find it less fun to use someone else's algorithm when I'm not smart enough to derive it myself. Some other sieves are simpler, but they are still relatively verbose, I feel.
 
 [Source](./src/003.rb) | [Back to Index](#index)
 
@@ -70,9 +75,9 @@ An alternative approach would be to generate all the prime numbers up until the 
 
 My goal was to optimize the search as much as possible. The general idea is to go down the palindromes in descending order, and stop as soon as we find a product of two 3-digit numbers. 999 is the largest 3-digit number, and 999<sup>2</sup> = 998001, so the largest palindrome smaller than that, 997799, is our starting point.
 
-The product verification function basically checks _x_ for a factor _f_ in [100, 999] such that _x_ ÷ _f_ is also in [100, 999]. We can optimize this in three ways:
-1. Stop at sqrt(_x_); multiplication is commutative, so going past this would be redoing work.
-2. Go in descending order; because we are looking for the largest palindrome, sqrt(_x_) will probably be closer to 999 than to 100.
+The product verification function basically checks $x$ for a factor $f$ in $[100, 999]$ such that $x \div f$ is also in $[100, 999]$. We can optimize this in three ways:
+1. Stop at $\sqrt x$; multiplication is commutative, so going past this would be redoing work.
+2. Go in descending order; because we are looking for the largest palindrome, $\sqrt x$ will probably be closer to 999 than to 100.
 3. If the palindrome is odd, only check for odd factors, because the product of an even number and any integer is even.
 
 As for generating the next smallest palindrome, we're essentially decrementing the left half by 1, then mirroring it. Instead of simply starting with a 3-digit number and concatenating its reverse string.
@@ -85,7 +90,7 @@ As for generating the next smallest palindrome, we're essentially decrementing t
 >
 > What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 
-As per group theory, the lowest common multiple of _a_ and _b_, denoted lcm(_a_, _b_), is _ab_ / gcd(_a_, _b_), where gcd is the greatest common denominator of _a_ and _b_. We use the Euclidean algorithm to efficiently calculate the gcd, then take advantage of the fact that lcm(_a_, _b_, _c_) = lcm(lcm(_a_, _b_), c) and expand for 20 parameters.
+As per group theory, the lowest common multiple of $a$ and $b$, denoted $\operatorname{lcm}(a, b)$, is $ab \div \operatorname{gcd}(a, b)$, where $\operatorname{gcd}$ is the greatest common denominator of $a$ and $b$. We use the Euclidean algorithm to efficiently calculate the $\operatorname{gcd}$, then take advantage of the fact that $\operatorname{lcm}(a, b, c) = \operatorname{lcm}(\operatorname{lcm}(a, b), c)$ and expand for 20 parameters.
 
 [Source](./src/005.rb) | [Back to Index](#index)
 
@@ -93,17 +98,27 @@ As per group theory, the lowest common multiple of _a_ and _b_, denoted lcm(_a_,
 
 > The sum of the squares of the first ten natural numbers is,
 >
-> 1<sup>2</sup> + 2<sup>2</sup> + ... + 10<sup>2</sup> = 385
+> $1^2 + 2^2 + \ldots + 10^2 = 385$
 >
 > The square of the sum of the first ten natural numbers is,
 >
-> (1 + 2 + ... + 10)<sup>2</sup> = 552 = 3025
+> $(1 + 2 + \ldots + 10)^2 = 552 = 3025$
 >
 > Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025 − 385 = 2640.
 >
 > Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
 
-For the sum of squares, each new term grows quadratically (1<sup>2</sup> = 1, 2<sup>2</sup> = 4, 3<sup>2</sup> = 9, ... are the values of x<sup>2</sup>), which means the sum grows cubically.  There are various methods to compute the exact cubic equation, but I used the [Lagrange polynomial](https://en.wikipedia.org/wiki/Lagrange_polynomial) with four data points to obtain x<sup>3</sup>/3 + x<sup>2</sup>/2 + x/6.  Because of floating point error, the division should be done last, or you risk computing the wrong answer, so I computed (2x<sup>3</sup> + 3x<sup>2</sup> + x) / 6 instead.
+For the sum of squares, each new term grows quadratically $(1^2 = 1, 2^2 = 4, 3^2 = 9, \ldots$ are the values of $x^2$), which means the sum grows cubically.  There are various methods to compute the exact cubic equation, but I used the [Lagrange polynomial](https://en.wikipedia.org/wiki/Lagrange_polynomial) with four data points to obtain:
+
+$$
+\frac{x^3}{3} + \frac{x^2}{2} + \frac{x}{6}
+$$
+
+Because of floating point error, the division should be done last, or you risk computing the wrong answer, so I instead computed:
+
+$$
+\frac{2x^3 + 3x^2 + x}{6}
+$$
 
 For the square of the sum, the base is just an arithmetic series, so calculate the square of an [arithmetic sum](https://en.wikipedia.org/wiki/Arithmetic_progression#Sum).
 
@@ -117,7 +132,7 @@ Each operand of the subtraction can therefore be computed in constant time, rega
 >
 > What is the 10 001st prime number?
 
-As per [Rosser's theorem](https://en.wikipedia.org/wiki/Rosser's_theorem), an upper bound for _π_(_x_) is _x_(log _x_ + log log _x_), so use a high-performance sieve such as [that of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin) to find all of the primes up to it, then count the result up to the 10001st.
+As per Dusart's improvement on [Rosser's theorem](https://en.wikipedia.org/wiki/Rosser's_theorem), an upper bound for $\pi(n)$—the nth prime number—is $n(\ln n + \ln \ln n)$, so use a high-performance sieve such as [that of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin) to find all of the primes up to it, then count the result up to the 10001st.
 
 [Source](./src/007.rb) | [Back to Index](#index)
 
@@ -157,19 +172,23 @@ Then, for each of the remaining substrings, compute the product of the first 13 
 
 ## Problem 9: Special Pythagorean triplet
 
-> A Pythagorean triplet is a set of three natural numbers, _a_ < _b_ < _c_, for which,
-a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>
+> A Pythagorean triplet is a set of three natural numbers, $a < b < c$, for which,
+$a^2 + b^2 = c^2$
 >
 >For example, 32 + 42 = 9 + 16 = 25 = 52.
 >
->There exists exactly one Pythagorean triplet for which _a_ + _b_ + _c_ = 1000.
-Find the product _abc_.
+>There exists exactly one Pythagorean triplet for which $a + b + c = 1000$.
+Find the product $abc$.
 
 In order to avoid nested loops, which would hurt performance, we can use some algebra.
 
-Since we're given _a_<sup>2</sup> + _b_<sup>2</sup> = _c_<sup>2</sup> and _a_ + _b_ + _c_ = 100, we can solve for a specific variable in each equation; for example, _c_ = 1000 - _a_ - _b_. After squaring the trinomial and substituting the Pythagorean equation, we have _a_<sup>2</sup> + _b_<sup>2</sup> = 1000000 + _a_<sup>2</sup> + _b_<sup>2</sup> - 2000 _a_ - 2000 _b_ + 2 _ab_. Solve for _b_, and we have _b_ = (500000 - 1000 _a_) / (1000 - _a_).
+Since we're given $a^2 + b^2 = c^2$ and $a + b + c = 1000$, we can solve for a specific variable in each equation; for example, $c = 1000 - a - b$. After squaring the trinomial and substituting the Pythagorean equation, we have $a^2 + b^2 = 1000000 + a^2 + b^2 - 2000a - 2000b + 2ab$. Solve for $b$, and we have:
 
-Since _a_, _b_ and _c_ are integers, the first _a_ such that 1000 - _a_ divides 500000 - 1000 _a_ (the denominator and numerator of _b_, respectively) is the answer.
+$$
+b = \frac{500000 - 1000a}{1000 - a}
+$$
+
+Since $a$, $b$ and $c$ are integers, the first $a$ such that $1000 - a$ divides $500000 - 1000a$ (the denominator and numerator of $b$, respectively) is the answer.
 
 [Source](./src/009.rb) | [Back to Index](#index)
 
@@ -256,8 +275,12 @@ With many languages, the operands are so large that native integers are suscepti
 
 > The following iterative sequence is defined for the set of positive integers:
 >
-> _n_ → _n_/2 (n is even)
-> _n_ → 3_n_ + 1 (_n_ is odd)
+> $$
+> \begin{aligned}
+> & n \rightarrow \frac{n}{2} & (n \textrm{ is even}) \\
+> & n \rightarrow 3n + 1 & (n \textrm{ is odd})
+> \end{aligned}
+> $$
 >
 > Using the rule above and starting with 13, we generate the following sequence:
 >
@@ -279,7 +302,7 @@ Computing the length of the chain for a given number is fairly straightforward, 
 >
 > How many such routes are there through a 20×20 grid?
 
-This is a combinatorics problem: you need to go right 20 times and down 20 times; how many different ways are there to do so? In other words, you have to move 40 times, and 20 of those are "right" (or alternatively, 20 of those are "down"), hence the answer is "40 choose 20" or 40! / (20! · 20!). I wrote a [Combinatorics class](./src/combinatorics.rb) to facilitate the computation of factorials, combinations, and [permutations](https://en.wikipedia.org/wiki/Permutation), with some optimizations to reduce the number of multiplication operations since factorial is a linear-time function.
+This is a combinatorics problem: you need to go right 20 times and down 20 times; how many different ways are there to do so? In other words, you have to move 40 times, and 20 of those are "right" (or alternatively, 20 of those are "down"), hence the answer is "40 choose 20" or $\frac{40!}{20! \cdot 20!}$. I wrote a [Combinatorics class](./src/combinatorics.rb) to facilitate the computation of factorials, combinations, and [permutations](https://en.wikipedia.org/wiki/Permutation), with some optimizations to reduce the number of multiplication operations since factorial is a linear-time function.
 
 [Source](./src/015.rb) | [Back to Index](#index)
 
@@ -373,9 +396,9 @@ Now, let's go over how to count the number of months that start with Sunday. I'm
 At the beginning of each month, we check `day % 7` and increment the count if it's a Sunday. Then we jump to the 1st of next month by adding the number of days using the array. Add an extra day when it's February on a leap year. In the brute-force approach, this can be done all the way up to the end of the year 2000.
 
 As for the optimizations:
-- Optimization 1: Store the number of months that start with Sunday in a 28-year period. A leap year occurs every 4 years and there are 7 days in a week, resulting in a period of `lcm(7, 4) = 28` years. That means January 1 of 1901, 1929, 1957, 1985, etc., are all the same day of the week until after the year 2100, because that is not a leap year as per the rules. Fortunately for this problem, we don't even come close to that, so after counting the number of months that start on a Sunday from 1901–28, we can multiply the count by 3 and skip ahead to 1985. Even if we were to stop the optimizations there, we already cut down the number of months checked from 1200 to 528 (56% reduction).
-- Optimization 2: With only the previous optimization, we would have to iterate through each month from 1985 to 2000. This is actually not necessary because 1985–2000 is the same as 1901–1916 (28 × 3 = 84 years before), which we already calculated. If we store the count at the end of 1916, then we can simply add that to the count at the end of 1984 for our final answer. This cuts down the number of month checks to 336 (72% less than the brute force).
-- Optimization 3: Cache the count for each day of the week that a year can start with, for both leap years and non–leap years. The process of computing the first 28 years now involves 14 cache hits and 14 cache misses, cutting down the number of month checks by another half to 168 overall (86% less than brute force).
+1. Store the number of months that start with Sunday in a 28-year period. A leap year occurs every 4 years and there are 7 days in a week, resulting in a period of $\operatorname{lcm}(7, 4) = 28$ years. That means January 1 of 1901, 1929, 1957, 1985, etc., are all the same day of the week until after the year 2100, because that is not a leap year as per the rules. Fortunately for this problem, we don't even come close to that, so after counting the number of months that start on a Sunday from 1901–28, we can multiply the count by 3 and skip ahead to 1985. Even if we were to stop the optimizations there, we already cut down the number of months checked from 1200 to 528 (56% reduction).
+2. With only the previous optimization, we would have to iterate through each month from 1985 to 2000. This is actually not necessary because 1985–2000 is the same as 1901–1916 (28 × 3 = 84 years before), which we already calculated. If we store the count at the end of 1916, then we can simply add that to the count at the end of 1984 for our final answer. This cuts down the number of month checks to 336 (72% less than the brute force).
+3. Cache the count for each day of the week that a year can start with, for both leap years and non–leap years. The process of computing the first 28 years now involves 14 cache hits and 14 cache misses, cutting down the number of month checks by another half to 168 overall (86% less than brute force).
 
 In order to fully generalize this problem and solve it in constant time, similar methods could be used, but you would need special logic to handle optimization 1 around multiples of 100 years until you've counted 2800 years.
 
@@ -383,10 +406,10 @@ In order to fully generalize this problem and solve it in constant time, similar
 
 ## Problem 20: Factorial digit sum
 
-> _n_! means _n_ × (_n_ − 1) × ... × 3 × 2 × 1
+> $n!$ means $n \times (n - 1) \times \ldots \times 3 \times 2 \times 1$
 >
-> For example, 10! = 10 × 9 × ... × 3 × 2 × 1 = 3628800,\
-> and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
+> For example, $10! = 10 \times 9 \times \ldots \times 3 \times 2 \times 1 = 3628800$,\
+> and the sum of the digits in the number $10!$ is $3 + 6 + 2 + 8 + 8 + 0 + 0 = 27$.
 >
 > Find the sum of the digits in the number 100!
 
@@ -396,14 +419,14 @@ Like before, Ruby already solves integer overflow, and I'm not aware of any way 
 
 ## Problem 21: Amicable numbers
 
-> Let _d_(n) be defined as the sum of proper divisors of _n_ (numbers less than _n_ which divide evenly into _n_).\
-> If _d_(_a_) = _b_ and _d_(_b_) = _a_, where _a_ ≠ _b_, then _a_ and _b_ are an amicable pair and each of _a_ and _b_ are called amicable numbers.
+> Let $d(n)$ be defined as the sum of proper divisors of $n$ (numbers less than $n$ which divide evenly into $n$).\
+> If $d(a) = b$ and $d(b) = a$, where $a \neq b$, then $a$ and $b$ are an amicable pair and each of $a$ and $b$ are called amicable numbers.
 >
-> For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore _d_(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and 142; so _d_(284) = 220.
+> For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore $d(220) = 284$. The proper divisors of 284 are 1, 2, 4, 71 and 142; so $d(284) = 220$.
 >
 > Evaluate the sum of all the amicable numbers under 10000.
 
-The trick is to not fall into the trap of doing any division or prime number checks whatsoever. Since we need to check _d_(_n_) for every 1 ≤ _n_ ≤ 10000, we could simply compute the entire function prior to doing any amicable pair checks. Initializing _d_(_n_) = 1, and then for every integer _i_ up to 5000, increment _d_(_i_) by _i_, _d_(2i) by _i_, …, _d_(10000 - 10000 % _i_) by _i_. After _d_ is taken care of, the rest is relatively straightforward, but note that if _d_[_a_] = _a_, then _a_ is not part of an amicable pair, because something cannot be paired with itself.
+The trick is to not fall into the trap of doing any division or prime number checks whatsoever. Since we need to check $d(n)$ for every $1 \le n \le 10000$, we could simply compute the entire function prior to doing any amicable pair checks. Initializing $d(n) = 1$, and then for every integer $i$ up to 5000, increment $d(i)$ by $i$, $d(2i)$ by $i$, $d(3i)$ by $i$, etc. until we pass the boundary of 10000. After $d$ is computed, the rest is relatively straightforward, but note that if $d(a) = a$, then $a$ is not part of an amicable pair, because something cannot be paired with itself.
 
 [Source](./src/021.rb) | [Back to Index](#index)
 
@@ -430,7 +453,7 @@ Lastly, the data structure is an array, but since Ruby is 0-indexed, an empty st
 
 > A perfect number is a number for which the sum of its proper divisors is exactly equal to the number. For example, the sum of the proper divisors of 28 would be 1 + 2 + 4 + 7 + 14 = 28, which means that 28 is a perfect number.
 >
-> A number _n_ is called deficient if the sum of its proper divisors is less than _n_ and it is called abundant if this sum exceeds _n_.
+> A number $n$ is called deficient if the sum of its proper divisors is less than $n$ and it is called abundant if this sum exceeds $n$.
 >
 > As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest number that can be written as the sum of two abundant numbers is 24. By mathematical analysis, it can be shown that all integers greater than 28123 can be written as the sum of two abundant numbers. However, this upper limit cannot be reduced any further by analysis even though it is known that the greatest number that cannot be expressed as the sum of two abundant numbers is less than this limit.
 >
@@ -455,7 +478,7 @@ This can be solved in a few steps:
 >
 > What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 
-I've seen both brute-force solutions that slowly generate and sort every permutation in _O_(_n_!) time, as well as "pen and paper" solutions that suffice. While a recursive algorithm that generates permutations for any character set you through it is neat, it hurts performance so much and involves "so little math" that it was never on the table for me. While a "pen and paper" solution does the job as far as netting you points, I wouldn't have been satisfied with completing a Project Euler problem without writing any code, so my solution is actually a generalized "pen and paper" solution.
+I've seen both brute-force solutions that slowly generate and sort every permutation in $O(n!)$ time, as well as "pen and paper" solutions that suffice. While a recursive algorithm that generates permutations for any character set you through it is neat, it hurts performance so much and involves "so little math" that it was never on the table for me. While a "pen and paper" solution does the job as far as netting you points, I wouldn't have been satisfied with completing a Project Euler problem without writing any code, so my solution is actually a generalized "pen and paper" solution.
 
 Our iterative algorithm will be crafting the permutation from left to right by calculating each digit. Instead of using the answer to the problem as an example, we can use a much shorter example—the 3124 example they used in the description, which happens to be the 13th lexicographic permutation of 1, 2, 3 and 4. For the purpose of this explanation, let's just forget that we're using 3124, and pretend we're attempting to find the 13th permutation of 1, 2, 3 and 4.
 
@@ -492,19 +515,19 @@ To see the algorithm in action on the full problem, the factorials are [1, 3, 6,
 
 > The Fibonacci sequence is defined by the recurrence relation:
 >
-> _F_<sub>_n_</sub> = _F_<sub>_n_−1</sub> + _F_<sub>n</sub>−2, where _F_<sub>1</sub> = 1 and _F_<sub>2</sub> = 1.
+> $F_n = F_{n−1} + F_{n−2}$, where $F_1 = 1$ and $F_2 = 1$.
 >
 > Hence the first 12 terms will be: [_redacted_]
 >
-> The 12th term, F<sub>12</sub>, is the first term to contain three digits.
+> The 12th term, $F_{12}$, is the first term to contain three digits.
 >
 > What is the index of the first term in the Fibonacci sequence to contain 1000 digits?
 
-Seeing as the Fibonacci sequence is a [constant-recursive sequence](https://en.wikipedia.org/wiki/Constant-recursive_sequence), there is a formula for calculating the nth term in the sequence, known as [Binet's formula](https://en.wikipedia.org/wiki/Fibonacci_number#Binet's_formula), and it can be written in terms of _F_<sub>_n_</sub>:
+Seeing as the Fibonacci sequence is a [constant-recursive sequence](https://en.wikipedia.org/wiki/Constant-recursive_sequence), there is a formula for calculating the nth term in the sequence, known as [Binet's formula](https://en.wikipedia.org/wiki/Fibonacci_number#Binet's_formula), and it can be written in terms of $F_n$:
 
-> _n_(_F_) = ⌈log<sub>φ</sub>(_F_ · √5 + ½)⌉.
-
-Note that this is slightly modified from the linked page's equation—the `floor` being changed to a `ceil`—because we want the smallest index that exceeds a given value, instead of the largest index that does not exceed a given value.
+$$
+n(F) = \left\lceil \log_\psi\left(F \cdot \sqrt 5 + \frac{1}{2}\right) \right\rceil
+$$
 
 Ruby's default floats and math library do not play that nicely with operations on large numbers, so we have to work around them a bit. We also make use of the [logarithm change of base](https://en.wikipedia.org/wiki/Logarithm#Change_of_base) formula as Ruby's BigMath library only takes integer bases, and the [distributive property of exponents](https://en.wikipedia.org/wiki/Exponentiation#Identities_and_properties) for a micro-optimization in calculating the [golden ratio](https://en.wikipedia.org/wiki/Golden_ratio) φ.
 
@@ -526,7 +549,7 @@ Ruby's default floats and math library do not play that nicely with operations o
 >
 > Where 0.1(6) means 0.166666..., and has a 1-digit recurring cycle. It can be seen that <sup>1</sup>/<sub>7</sub> has a 6-digit recurring cycle.
 >
-> Find the value of _d_ < 1000 for which <sup>1</sup>/<sub>_d_,</sub> contains the longest recurring cycle in its decimal fraction part.
+> Find the value of $d < 1000$ for which $\frac{1}{d}$ contains the longest recurring cycle in its decimal fraction part.
 
 In order to calculate the period of a decimal representation, we just do [long division](https://en.wikipedia.org/wiki/Long_division) until the numerator was previously seen. The hash stores the position at which a numerator was first seen, so that in the case of a repeat, we just subtract the current position from the hash's value to obtain the period.
 
@@ -538,26 +561,26 @@ Note that my solution only checks prime numbers because I believe that the perio
 
 > Euler discovered the remarkable quadratic formula:
 >
-> _n_<sup>2</sup> + _n_ + 41
+> $n^2 + n + 41$
 >
-> It turns out that the formula will produce 40 primes for the consecutive integer values 0 ≤ _n_ ≤ 39. However, when _n_ = 40, 402 + 40 + 41 = 40(40 + 1) + 41 is divisible by 41, and certainly when _n_ = 41, 412 + 41 + 41 is clearly divisible by 41.
+> It turns out that the formula will produce 40 primes for the consecutive integer values $0 \le n \le 39$. However, when $n = 40$, 402 + 40 + 41 = 40(40 + 1) + 41 is divisible by 41, and certainly when $n = 41$, 412 + 41 + 41 is clearly divisible by 41.
 >
-> The incredible formula n<sup>2</sup> − 79 _n_ + 1601 was discovered, which produces 80 primes for the consecutive values 0 ≤ _n_ ≤ 79. The product of the coefficients, −79 and 1601, is −126479.
+> The incredible formula $n^2 − 79n + 1601$ was discovered, which produces 80 primes for the consecutive values $0 \le n \le 79$. The product of the coefficients, −79 and 1601, is −126479.
 >
 > Considering quadratics of the form:
 >
-> _n_<sup>2</sup> + _an_ + _b_, where |_a_| < 1000 and |_b_| ≤ 1000
+> $n^2 + an + b$, where $|a| < 1000$ and $|b| \le 1000$
 >
-> where |_n_| is the modulus/absolute value of _n_
+> where $|n|$ is the modulus/absolute value of $n$
 > e.g. |11| = 11 and |−4| = 4
 >
-> Find the product of the coefficients, _a_ and _b_, for the quadratic expression that produces the maximum number of primes for consecutive values of _n_, starting with _n_ = 0.
+> Find the product of the coefficients, $a$ and $b$, for the quadratic expression that produces the maximum number of primes for consecutive values of $n$, starting with $n = 0$.
 
 My solution is mostly brute force, but with the following optimizations:
-- Since the polynomial needs to evaluate to a prime for _n_ = 0, only check for prime values of _b_. A sieve can be used to find prime numbers up to 1000.
-- Since the polynomial needs to evaluate to a prime for _n_ = 1, only check for odd values of _a_, and for _a_ > -_b_.
-- Since we check for primality many times, use a sieve beforehand so that the checks are done in constant time after the sieve is used. I arbitrarily set the upper bound of the sieve to the value of the polynomial at _n_ = 1000, _a_ = 1000 and _b_ = 1000, which happens to be overkill but I'm not sure how to reduce that further.
-- Micro-optimization: reduce the polynomial _n_<sup>2</sup> + _an_ + _b_ to _n_(_n_ + _a_) + _b_, removing one multiplication operation.
+- Since the polynomial needs to evaluate to a prime for $n = 0$, only check for prime values of $b$. A sieve can be used to find prime numbers up to 1000.
+- Since the polynomial needs to evaluate to a prime for $n = 1$, only check for odd values of $a$, and for $a > -b$.
+- Since we check for primality many times, use a sieve beforehand so that the checks are done in constant time after the sieve is used. I arbitrarily set the upper bound of the sieve to the value of the polynomial at $n = 1000$, $a = 1000$ and $b = 1000$, which happens to be overkill but I'm not sure how to reduce that further.
+- Micro-optimization: reduce the polynomial $n^2 + an + b$ to $n(n + a) + b$, removing one multiplication operation.
 
 [Source](./src/027.rb) | [Back to Index](#index)
 
@@ -580,24 +603,34 @@ My solution is mostly brute force, but with the following optimizations:
 If we divide the spiral into sections, we can observe that each sequence is polynomial.
 
 1. From the top-left to bottom-right, we have: 1, 3, 7, 13, 21, …, which is quadratic because the first differences (2, 4, 6, 8, …) are linear.
-2. From the centre to the top-right, we have: 1<sup>2</sup>, 2<sup>2</sup>, 3<sup>2</sup>, …, which is obviously quadratic.
-3. From the centre to the bottom-left, we have: 0² + 1, 2² + 1, 4² + 1, …, which is quadratic.
+2. From the centre to the top-right, we have: $1^2, 2^2, 3^2, \ldots$, which is obviously quadratic.
+3. From the centre to the bottom-left, we have: $0^2 + 1, 2^2 + 1, 4^2 + 1, \ldots$, which is also quadratic.
 
 The sum of a polynomial sequence is another polynomial with one more order, so we know that the answer is the value of a cubic equation. A variety of techniques can be used to determine the polynomial coefficients for each section, but I used [Lagrange interpolation](https://en.wikipedia.org/wiki/Lagrange_polynomial), which has several implementations online but requires at least four inputs to yield a cubic formula, so I had to expand the spiral a bit. The sums can thus be calculated as:
 
-1. _x_<sup>3</sup>/3 + 2 _x_/3
-2. 4 _x_<sup>3</sup>/3 - _x_/3
-3. 4 _x_<sup>3</sup>/3 - 2 _x_<sup>2</sup> + 5 _x_/3
+$$
+\begin{align}
+& \frac{x^3}{3} + \frac{2x}{3} \\
+& \frac{4x^3}{3} - \frac{x}{3} \\
+& \frac{4x^3}{3} - 2x^2 + \frac{5x}{3}
+\end{align}
+$$
 
-Before we can sum these together, we need to address the fact that polynomial #1 accounts for roughly half of the diagonal terms, whereas each of the other two are roughly a quarter. One way would have been to split everything up uniformly—instead of three polynomials, have four polynomials that each account for one quadrant of the spiral. However, we could just use some algebra; the width _w_ of the spiral is always odd, so we can substitute in _x_ = _w_ for polynomial #1 and _x_ = (_w_ + 1) / 2 for the other two:
+Before we can sum these together, we need to address the fact that polynomial #1 accounts for roughly half of the diagonal terms, whereas each of the other two are roughly a quarter. One way would have been to split everything up uniformly—instead of three polynomials, have four polynomials that each account for one quadrant of the spiral. However, we could just use some algebra; the width $w$ of the spiral is always odd, so we can substitute in $x = w$ for polynomial #1 and $x = (w + 1) / 2$ for the other two:
 
-1. (_w_<sup>3</sup> + 2 _w_) / 3
-2. (_w_<sup>3</sup> + 3 _w_<sup>2</sup> + 2 _w_) / 6
-3. (_w_<sup>3</sup> + 2 _w_ + 3) / 6
+$$
+\begin{aligned}
+& (w^3 + 2w) / 3 \\
+& (w^3 + 3w^2 + 2w) / 6 \\
+& (w^3 + 2w + 3) / 6
+\end{aligned}
+$$
 
 After summing the result, collecting the like terms, and then subtracting two to adjust for the triple-counting of the 1 in the middle, we end up with:
 
-(4 _w_<sup>3</sup> + 3 _w_<sup>2</sup> + 8 _w_ - 9) / 6
+$$
+(4w^3 + 3w^2 + 8w - 9) / 6
+$$
 
 Micro-optimization: reduce the amount of multiplication/exponentiation operations by using the [distributive property](https://en.wikipedia.org/wiki/Distributive_property).
 
@@ -605,18 +638,22 @@ Micro-optimization: reduce the amount of multiplication/exponentiation operation
 
 ## Problem 29: Distinct powers
 
-> Consider all integer combinations of _a_<sup>b</sup> for 2 ≤ _a_ ≤ 5 and 2 ≤ _b_ ≤ 5:
+> Consider all integer combinations of $a^b$ for $2 \le a \le 5$ and $2 \le b \le 5$:
 >
-> 2<sup>2</sup> = 4, 2<sup>3</sup> = 8, 2<sup>4</sup> = 16, 2<sup>5</sup> = 32
-> 3<sup>2</sup> = 9, 3<sup>3</sup> = 27, 3<sup>4</sup> = 81, 3<sup>5</sup> = 243
-> 4<sup>2</sup> = 16, 4<sup>3</sup> = 64, 4<sup>4</sup> = 256, 4<sup>5</sup> = 1024
-> 5<sup>2</sup> = 25, 5<sup>3</sup> = 125, 5<sup>4</sup> = 625, 5<sup>5</sup> = 3125
+> $$
+> \begin{matrix}
+> 2^2 = 4,&  2^3 = 8,&   2^4 = 16,&  2^5 = 32 \\
+> 3^2 = 9,&  3^3 = 27,&  3^4 = 81,&  3^5 = 243 \\
+> 4^2 = 16,& 4^3 = 64,&  4^4 = 256,& 4^5 = 1024 \\
+> 5^2 = 25,& 5^3 = 125,& 5^4 = 625,& 5^5 = 3125
+> \end{matrix}
+> $$
 >
 > If they are then placed in numerical order, with any repeats removed, we get the following sequence of 15 distinct terms:
 >
 > 4, 8, 9, 16, 25, 27, 32, 64, 81, 125, 243, 256, 625, 1024, 3125
 >
-> How many distinct terms are in the sequence generated by _ab_ for 2 ≤ _a_ ≤ 100 and 2 ≤ _b_ ≤ 100?
+> How many distinct terms are in the sequence generated by $ab$ for $2 \le a \le 100$ and $2 \le b \le 100$?
 
 I simply brute-forced it, but made sure to only perform a single multiplication operation in the inner loop instead of the slower exponentiation operator.
 
@@ -626,11 +663,15 @@ I simply brute-forced it, but made sure to only perform a single multiplication 
 
 > Surprisingly there are only three numbers that can be written as the sum of fourth powers of their digits:
 >
-> 1634 = 1<sup>4</sup> + 6<sup>4</sup> + 3<sup>4</sup> + 4<sup>4</sup>\
-> 8208 = 8<sup>4</sup> + 2<sup>4</sup> + 0<sup>4</sup> + 8<sup>4</sup>\
-> 9474 = 9<sup>4</sup> + 4<sup>4</sup> + 7<sup>4</sup> + 4<sup>4</sup>
+> $$
+> \begin{aligned}
+> 1634 &= 1^4 + 6^4 + 3^4 + 4^4 \\
+> 8208 &= 8^4 + 2^4 + 0^4 + 8^4 \\
+> 9474 &= 9^4 + 4^4 + 7^4 + 4^4
+> \end{aligned}
+> $$
 >
-> As 1 = 1<sup>4</sup> is not a sum it is not included.
+> As $1 = 1^4$ is not a sum it is not included.
 >
 > The sum of these numbers is 1634 + 8208 + 9474 = 19316.
 >

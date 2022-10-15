@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 limit = 99
 t0 = Time.now
 

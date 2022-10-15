@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require_relative 'libs/sum_of_divisors'
 
 limit = 10_000

@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 t0 = Time.now
 key_length = 3
 key_min = 'a'.ord

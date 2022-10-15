@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require_relative '018'
 triangle = IO.readlines("#{__dir__}/triangle.txt").collect do |line|
   line.split(' ').collect(&:to_i)

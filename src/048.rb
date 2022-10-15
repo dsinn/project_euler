@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require_relative 'projecteuler'
 t0 = Time.now
 limit = 1000

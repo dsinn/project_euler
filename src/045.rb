@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 t0 = Time.now
 
 # Every other triangular number is a hexagonal number, LOL

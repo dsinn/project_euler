@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 t0 = Time.now
 target = 10**6
 n_max = 10**2

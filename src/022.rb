@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 content = IO.readlines("#{__dir__}/names.txt")
 names = content[0].gsub(/[^A-Za-z,]/, '').upcase.split(',').sort
 names.insert(0, '')

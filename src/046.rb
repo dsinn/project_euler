@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 t0 = Time.now
 double_squares = {}
 odd_primes = [3]

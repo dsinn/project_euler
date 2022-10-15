@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 t0 = Time.now
 distinct_pfactors = [[-1], [-1], [2]]
 primes = [2]

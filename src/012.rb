@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require_relative 'divisors'
 
 limit = 500

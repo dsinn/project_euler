@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 t0 = Time.now
 power10 = 1
 

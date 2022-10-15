@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 # t^2 + t = 3p^2 - p = 4h^2 - 2h
 # t = [-1 + sqrt(16h^2 - 8h + 1)] / 2
 #

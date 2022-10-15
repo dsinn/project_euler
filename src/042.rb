@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 content = IO.readlines("#{__dir__}/words.txt")
 words = content[0].gsub('"', '').split(',')
 

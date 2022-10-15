@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 iters = 10**4 # Testing
 
 t0 = Time.now

@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 def is_divisible_by_triple_digits(x)
   999.step(Math.sqrt(x).floor, -1 - (x & 1)) do |i|
     if (x % i).zero?

@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 limit = 10**3
 
 t0 = Time.now

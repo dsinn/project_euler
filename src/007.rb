@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require_relative 'projecteuler'
 
 x = 10_001

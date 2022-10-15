@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 collatz_lengths = {}
 collatz_lengths[1] = 1
 max = 0

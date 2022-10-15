@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require_relative 'projecteuler'
 
 is_prime = sieve_atkin(2_000_000)

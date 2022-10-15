@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 limit = 10**4
 iters = 50
 

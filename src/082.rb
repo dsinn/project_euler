@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 t0 = Time.now
 
 matrix = IO.readlines("#{__dir__}/matrix.txt").collect do |line|

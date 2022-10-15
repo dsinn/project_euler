@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 t0 = Time.now
 amount = 200
 ways = Array.new(amount + 1) { 0 }

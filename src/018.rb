@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 def max_triangle_path_sum(triangle)
   prev_maxes = Array.new(triangle.length)
   maxes = Array.new(triangle.length)

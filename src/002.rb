@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 a = 1
 b = 2
 

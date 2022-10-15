@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 x = 600_851_475_143
 factors = []
 

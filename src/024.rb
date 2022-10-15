@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 def nthPerm(n, chars)
   chars = chars.split('') if chars.is_a?(String)
 

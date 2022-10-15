@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 def f(x)
   raise 'The spiral cannot have an even width.' if x.even?
 

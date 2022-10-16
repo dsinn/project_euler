@@ -3,7 +3,7 @@ require_relative 'primes'
 
 t0 = Time.now
 
-def sortedString(n)
+def sorted_string(n)
   n.to_s.chars.sort.join
 end
 
@@ -17,8 +17,8 @@ answer = 0
       j = i + inc
       k = i + (inc << 1)
       if !((i == 1487) && (j == 4817) && (k == 8147)) && is_prime[j] && is_prime[k]
-        s = sortedString(i)
-        if (s == sortedString(j)) && (s == sortedString(k))
+        s = sorted_string(i)
+        if (s == sorted_string(j)) && (s == sorted_string(k))
           puts i.to_s + j.to_s + k.to_s
           answer = i + j + k
         end

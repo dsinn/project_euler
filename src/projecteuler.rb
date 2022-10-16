@@ -12,9 +12,7 @@ def gcd(a, b)
   # Euclidean algorithm
   a, b = b, a if a < b
 
-  until b.zero?
-    a, b = b, a % b
-  end
+  a, b = b, a % b until b.zero?
 
   a
 end

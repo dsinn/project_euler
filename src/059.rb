@@ -9,8 +9,7 @@ values = content[0].split(',')
 buckets = Array.new(key_length) { [] }
 
 def valid?(x)
-  # /[A-Za-z0-9 !,;\.\(\)]/
-  # <%20>    <!    >    <'()            >    <,    >    <.    >    <0-9            >    <;    >    <A-Z            >    <a-z             >
+  # /[A-Za-z0-9 !,;\.\(\)]/ but use ASCII codes for performance
   [32, 33, 44, 46, 59].include?(x) || [(39..41), (48..57), (65..90), (97..122)].any? { |range| range.include?(x) }
 end
 

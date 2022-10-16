@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 t0 = Time.now
+require_relative 'primes'
 require_relative 'projecteuler'
 
 def truncatable_prime?(digits)
@@ -7,7 +8,7 @@ def truncatable_prime?(digits)
     truncatable_prime = true
     number = digits.join('').to_i
     while number > 0
-      unless prime? number
+      unless Primes.prime? number
         truncatable_prime = false
         break
       end
@@ -17,7 +18,7 @@ def truncatable_prime?(digits)
     if truncatable_prime
       s = digits.join('')[1..-1]
       until s.empty?
-        unless prime? s.to_i
+        unless Primes.prime? s.to_i
           truncatable_prime = false
           break
         end

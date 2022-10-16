@@ -1,25 +1,3 @@
-$is_prime = {}
-$is_prime[1] = false
-$is_prime[2] = true
-$is_prime[3] = true
-def prime?(n)
-  if $is_prime.key?(n)
-    $is_prime[n]
-  elsif (n & 1).zero?
-    false
-  else
-    prime = true
-    3.step(Math.sqrt(n).to_i, 2) do |i|
-      if prime?(i) && (n % i).zero?
-        prime = false
-        break
-      end
-    end
-    $is_prime[n] = prime
-    prime
-  end
-end
-
 def arithmetic_series_sum(start, bound, increment)
   start_remainder = start % increment
 
@@ -28,26 +6,6 @@ def arithmetic_series_sum(start, bound, increment)
   bound -= increment if bound_remainder < start_remainder
 
   (start + bound) * ((bound - start) / increment + 1) / 2
-end
-
-def get_coprime_digits(a, b)
-  # Sieve of Eratosthenes
-  isnt_coprime = Array.new(b + 1)
-  (a..b).each do |i|
-    next if isnt_coprime[i]
-
-    j = i + i
-    while j < b
-      isnt_coprime[j] = true
-      j += i
-    end
-  end
-
-  coprimes = []
-  (a..b).each do |i|
-    coprimes << i unless isnt_coprime[i]
-  end
-  coprimes
 end
 
 def gcd(a, b)
@@ -71,46 +29,6 @@ def exp10(n)
     product *= 10
   end
   product
-end
-
-# rubocop:disable all
-def sieve_atkin(limit)
-  is_prime = Array.new(limit + 1) { false }
-  sqrt = Math.sqrt(limit).to_i
-  (1..sqrt).each do |i|
-    i2 = i * i
-    (1..sqrt).each do |j|
-      j2 = j * j
-      n = 4 * i2 + j2
-      is_prime[n] = !is_prime[n] if (n <= limit) && ((n % 12 == 1) || (n % 12 == 5))
-
-      n = 3 * i2 + j2
-      is_prime[n] = !is_prime[n] if (n <= limit) && (n % 12 == 7)
-
-      next unless i > j
-
-      n = 3 * i2 - j2
-      is_prime[n] = !is_prime[n] if (n <= limit) && (n % 12 == 11)
-    end
-  end
-
-  (5..sqrt).each do |n|
-    next unless is_prime[n]
-
-    n2 = n * n
-    n2.step(limit, n2) do |k|
-      is_prime[k] = false
-    end
-  end
-  is_prime[2] = true
-  is_prime[3] = true
-  is_prime
-end
-# rubocop:enable all
-
-def get_primes(limit)
-  is_prime = sieve_atkin(limit)
-  (2..limit).to_a.delete_if { |x| !(is_prime[x]) }
 end
 
 def factorial(n)

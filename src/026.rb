@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
-t0 = Time.now
-require_relative 'projecteuler'
+require_relative 'primes'
 
-primes = get_primes(999)
+t0 = Time.now
+primes = Primes.prime_list(999)
 answer = -1
 max_len = -1
 primes.each do |d|

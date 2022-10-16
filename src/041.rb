@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 t0 = Time.now
+require_relative 'primes'
 require_relative 'projecteuler'
 
 stop = false
@@ -9,7 +10,7 @@ stop = false
   end
   permutations(chars, len).each do |digits|
     number = digits.join('').to_i
-    next unless prime? number
+    next unless Primes.prime? number
 
     puts number
     stop = true

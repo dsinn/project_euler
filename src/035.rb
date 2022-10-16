@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
-t0 = Time.now
+require_relative 'primes'
 require_relative 'projecteuler'
 
-is_prime = sieve_atkin(999_999)
+t0 = Time.now
+
+is_prime = Primes.prime_map(999_999)
 circular_primes = {}
 (2..6).each do |len|
   sigma_star([1, 3, 7, 9], len).each do |digits|

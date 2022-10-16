@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
+require_relative 'primes'
+
 t0 = Time.now
 t1 = -1
-require_relative 'projecteuler'
 
 set_size = 4
 primes = ['3']
@@ -10,7 +11,7 @@ complete_graphs = []
 min_sum = -1
 while (min_sum < 0) || !complete_graphs.empty?
   x += 2
-  next unless prime? x
+  next unless Primes.prime? x
 
   xs = x.to_s
 
@@ -22,7 +23,7 @@ while (min_sum < 0) || !complete_graphs.empty?
 
     pairwise_prime = true
     graph.each do |p|
-      if (!prime? (p + xs).to_i) || (!prime? (xs + p).to_i)
+      if (!Primes.prime? (p + xs).to_i) || (!Primes.prime? (xs + p).to_i)
         pairwise_prime = false
         break
       end
@@ -39,7 +40,7 @@ while (min_sum < 0) || !complete_graphs.empty?
   end
 
   primes.each do |p|
-    if ((min_sum < 0) || (p.to_i + (set_size - 1) * x < min_sum)) && prime?((p + xs).to_i) && prime?((xs + p).to_i)
+    if ((min_sum < 0) || (p.to_i + (set_size - 1) * x < min_sum)) && Primes.prime?((p + xs).to_i) && Primes.prime?((xs + p).to_i)
       complete_graphs << [p, xs]
     end
   end

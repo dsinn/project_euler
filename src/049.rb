@@ -1,12 +1,13 @@
 #!/usr/bin/env ruby
+require_relative 'primes'
+
 t0 = Time.now
-require_relative 'projecteuler'
 
 def sortedString(n)
   n.to_s.chars.sort.join
 end
 
-is_prime = sieve_atkin(9999)
+is_prime = Primes.prime_map(9999)
 answer = 0
 1001.step(9999, 2) do |i|
   if answer > 0

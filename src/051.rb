@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
-t0 = Time.now
+require_relative 'primes'
 require_relative 'projecteuler'
 
+t0 = Time.now
 static_digits_set_by_length = []
 index_combos_set_by_length = []
 ones = [1, 3, 5, 7]
@@ -43,7 +44,7 @@ while answer < 0
             index_combos.each do |index|
               digits[index] = i
             end
-            if (digits[0] > 0) && prime?(digits.join('').to_i)
+            if (digits[0] > 0) && Primes.prime?(digits.join('').to_i)
               primes += 1
               smallest = digits.join('').to_i if smallest < 0
             end

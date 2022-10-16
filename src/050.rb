@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 t0 = Time.now
-require_relative 'projecteuler'
+require_relative 'primes'
 
 limit = 10**6
-is_prime = sieve_atkin(limit - 1)
+is_prime = Primes.prime_map(limit - 1)
 primes = [2]
 3.step(limit - 1, 2) do |i|
   primes << i if is_prime[i]

@@ -2,11 +2,12 @@
 t0 = Time.now
 limit = 10**6 - 1
 
-$factorial = [1, 1, 2, 6, 24, 120, 720, 5040, 40_320, 362_880]
+FACTORIAL = [1, 1, 2, 6, 24, 120, 720, 5040, 40_320, 362_880].freeze
+
 def next_number(x)
   sum = 0
   while x > 0
-    sum += $factorial[x % 10]
+    sum += FACTORIAL[x % 10]
     x /= 10
   end
   sum

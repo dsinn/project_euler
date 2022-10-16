@@ -1,4 +1,7 @@
+# For counting the number of divisors of a number
+# https://en.wikipedia.org/wiki/Divisor_function
 class Divisors
+  # rubocop:disable Style/ClassVars
   @@divisors = {
     1 => { 1 => 1 },
     2 => { 1 => 1, 2 => 1 }
@@ -7,16 +10,17 @@ class Divisors
     1 => 1,
     2 => 2
   }
+  # rubocop:enable Style/ClassVars
 
   class << self
     def count(x)
       return @@count[x] if @@count.key?(x)
 
-      result = checkDivisor(x, 2)
+      result = check_divisor(x, 2)
       return result if result
 
       (3..100).step(2) do |p|
-        result = checkDivisor(x, p)
+        result = check_divisor(x, p)
         return result if result
       end
 
@@ -25,7 +29,7 @@ class Divisors
       @@count[x]
     end
 
-    def checkDivisor(x, p)
+    def check_divisor(x, p)
       return unless (x % p).zero?
 
       q = x / p
@@ -46,6 +50,6 @@ class Divisors
       count
     end
 
-    private :checkDivisor
+    private :check_divisor
   end
 end

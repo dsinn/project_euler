@@ -4,13 +4,13 @@ def max_triangle_path_sum(triangle)
   maxes = Array.new(triangle.length)
   maxes[0] = triangle[0][0]
 
-  (1..triangle.length - 1).each do |i|
+  (1...triangle.length).each do |i|
     prev_maxes, maxes = maxes, prev_maxes
     row = triangle[i]
     maxes[0] = prev_maxes[0] + row[0]
     maxes[i] = prev_maxes[i - 1] + row[i]
 
-    (1..i - 1).each do |j|
+    (1...i).each do |j|
       maxes[j] = row[j] + [prev_maxes[j], prev_maxes[j - 1]].max
     end
   end

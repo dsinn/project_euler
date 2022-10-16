@@ -1,54 +1,54 @@
 #!/usr/bin/env ruby
 days_in_month = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-startingYear = 1901
-endingYear = 2000
-remainderCount = 0
-remainderYears = (endingYear - startingYear) % 28
+starting_year = 1901
+ending_year = 2000
+remainder_count = 0
+remainder_years = (ending_year - starting_year) % 28
 
-totalCount = 0
-countsByStartingDay = [
+total_count = 0
+counts_by_starting_day = [
   {},
   {}
 ]
 
-startingDay = 365 # Skip to January 1, 1901
-day = startingDay
-year = startingYear
+starting_day = 365 # Skip to January 1, 1901
+day = starting_day
+year = starting_year
 
-while year <= endingYear
-  leapYearFlag = (year % 4).zero? && ((year % 100 > 0) || (year % 400).zero?) ? 1 : 0
-  firstDayOfYear = day % 7
+while year <= ending_year
+  leap_year_flag = (year % 4).zero? && ((year % 100 > 0) || (year % 400).zero?) ? 1 : 0
+  first_day_of_year = day % 7
 
-  if countsByStartingDay[leapYearFlag].key?(firstDayOfYear)
-    totalCount += countsByStartingDay[leapYearFlag][firstDayOfYear]
-    day += 365 + leapYearFlag
+  if counts_by_starting_day[leap_year_flag].key?(first_day_of_year)
+    total_count += counts_by_starting_day[leap_year_flag][first_day_of_year]
+    day += 365 + leap_year_flag
   else
-    yearCount = 0
+    year_count = 0
     (1..12).each do |month|
-      yearCount += 1 if day % 7 == 6 # 0 is a Monday, therefore 6 is a Sunday
+      year_count += 1 if day % 7 == 6 # 0 is a Monday, therefore 6 is a Sunday
 
       day += days_in_month[month]
-      day += 1 if (month == 2) && (leapYearFlag > 0)
+      day += 1 if (month == 2) && (leap_year_flag > 0)
     end
 
-    countsByStartingDay[leapYearFlag][firstDayOfYear] = yearCount
-    totalCount += yearCount
+    counts_by_starting_day[leap_year_flag][first_day_of_year] = year_count
+    total_count += year_count
   end
 
   year += 1
 
-  case year - startingYear
-  when remainderYears
-    remainderCount = totalCount
+  case year - starting_year
+  when remainder_years
+    remainder_count = total_count
   when 28
-    periodsToSkip = (endingYear - year).div(28)
-    totalCount *= periodsToSkip + 1
+    periods_to_skip = (ending_year - year).div(28)
+    total_count *= periods_to_skip + 1
 
-    totalCount += remainderCount
-    year += 28 * periodsToSkip + remainderYears
+    total_count += remainder_count
+    year += 28 * periods_to_skip + remainder_years
   end
 end
 
-puts totalCount
-puts countsByStartingDay
+puts total_count
+puts counts_by_starting_day

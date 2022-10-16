@@ -1,5 +1,8 @@
+# Utilities for prime numbers
 class Primes
-  @@is_prime = {1 => false, 2 => true, 3 => true}
+  # rubocop:disable Style/ClassVars
+  @@is_prime = { 1 => false, 2 => true, 3 => true }
+  # rubocop:enable Style/ClassVars
 
   class << self
     def prime?(n)

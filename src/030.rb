@@ -3,7 +3,7 @@ require_relative 'projecteuler'
 
 t0 = Time.now
 digits = [0, 0, 0, 0, 0, 2]
-last_index = digits.length - 1
+
 hypercubes = Array.new(10) do |i|
   j = i * i
   j * j * i

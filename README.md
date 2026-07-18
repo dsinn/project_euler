@@ -166,7 +166,7 @@ As per Dusart's improvement on [Rosser's theorem](https://en.wikipedia.org/wiki/
 
 Because the product of any integer and 0 is 0, this can be optimized by splitting by `/0+/` and discarding any substrings of length < 13.
 
-Then, for each of the remaining substrings, compute the product of the first 13 digits, and check if this exceeds the largest product so far. When traversing through the substring, divide the current product by the leftmost digit, multiply by the next digit to the right, and check the max product until you reach the end of the substring.
+Then, for each of the remaining substrings, compute the product of the first 13 digits, and check if this exceeds the largest product so far. When traversing through the substring, employ the "sliding window" technique: divide the current product by the leftmost digit, multiply by the next digit to the right, and check the max product until you reach the end of the substring.
 
 [Source](./src/008.rb) | [Back to Index](#index)
 
